@@ -36,4 +36,12 @@
     background: #c88e71;
     border-radius: 3px;
   }
+
+  .font-cinzel {
+    font-family: 'Cinzel', serif;
+  }
+  
+  .font-cormorant {
+    font-family: 'Cormorant Garamond', serif;
+  }
 }

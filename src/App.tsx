@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import {
   Building2,
   Phone,
@@ -25,6 +25,7 @@ import {
   Sun,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import InteriorShowcase from "@/components/InteriorShowcase";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -118,15 +119,47 @@ const amenities = [
   { icon: Building2, title: "Modern Architecture", text: "A sleek façade with premium urban presence." },
 ];
 
-const gallery = [
-  "/renders/3d render (4).png",
-  "/renders/3d render (5).png",
-  "/renders/3d render (7).png",
-  "/renders/3d render (8).png",
-  "/renders/3d render (11).png",
-  "/renders/3d render (12).png",
-  "/renders/3d render (14).png",
-  "/renders/3d render (15).png",
+const galleryItems = [
+  {
+    image: "/renders/3d render (4).png",
+    title: "Lavelle Façade",
+    description: "A striking architectural statement showcasing modern verticality, premium glass balconies, and warm wooden accents."
+  },
+  {
+    image: "/renders/3d render (5).png",
+    title: "Grand Entryway",
+    description: "The secure landscaped entrance, greeting residents and guests with native Ugandan plantings and soft ambient lighting."
+  },
+  {
+    image: "/renders/3d render (7).png",
+    title: "Sunset Balcony View",
+    description: "Private outdoor terrace offering open-air seating and beautiful panoramic vistas of the Kampala skyline."
+  },
+  {
+    image: "/renders/3d render (8).png",
+    title: "Premium Reception & Lobby",
+    description: "Double-height ground floor reception desk with fluted timber panels and premium stone floor details."
+  },
+  {
+    image: "/renders/3d render (11).png",
+    title: "Rooftop Dining Deck",
+    description: "An outdoor entertaining terrace equipped with premium dining layouts, BBQ stations, and skyline views."
+  },
+  {
+    image: "/renders/3d render (12).png",
+    title: "Skyline Pool & Wellness Deck",
+    description: "Elevated swimming pool and sun loungers designed for daily relaxation and recreation under the Kampala sun."
+  },
+  {
+    image: "/renders/3d render (14).png",
+    title: "Modern Facade Detail",
+    description: "Close-up detailing of the bespoke bronze framing, premium glass panels, and external column structures."
+  },
+  {
+    image: "/renders/3d render (15).png",
+    title: "Evening Residence View",
+    description: "The building illuminated at night, highlighting the warm interior layouts and architectural geometry."
+  }
 ];
 
 // ─── Shared helpers ───────────────────────────────────────────────────────────
@@ -160,108 +193,167 @@ function Hero({ onNavigate, onImageClick }: { onNavigate: (id: string) => void; 
   const settings = React.useContext(SettingsContext);
   return (
     <section className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#0b0b0d]">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(200,142,113,0.24),transparent_30%),radial-gradient(circle_at_left,rgba(255,255,255,0.08),transparent_25%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(200,142,113,0.18),transparent_35%),radial-gradient(circle_at_left,rgba(255,255,255,0.06),transparent_30%)] pointer-events-none" />
       
       {/* Floating Animated Icons */}
       <motion.div 
-        animate={{ y: [0, -15, 0], rotate: [0, 5, 0] }} 
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-16 left-[45%] text-[#c88e71]/40 hidden lg:block"
+        animate={{ y: [0, -12, 0], rotate: [0, 5, 0] }} 
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-16 left-[40%] text-[#c88e71]/20 hidden lg:block"
       >
-        <Sun className="h-10 w-10" />
+        <Sun className="h-8 w-8" />
       </motion.div>
       <motion.div 
-        animate={{ y: [0, 20, 0], rotate: [0, -5, 0] }} 
-        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-        className="absolute bottom-24 left-12 text-[#c88e71]/10 hidden md:block"
+        animate={{ y: [0, 15, 0], rotate: [0, -4, 0] }} 
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        className="absolute bottom-16 left-6 text-[#c88e71]/5 hidden md:block animate-pulse"
       >
-        <Building2 className="h-24 w-24" />
+        <Building2 className="h-16 w-16" />
       </motion.div>
       
-      <div className="relative flex flex-col min-h-[78vh] gap-10 px-6 py-16 md:px-10 lg:px-14 mt-10">
+      <div className="relative grid gap-12 lg:grid-cols-[1.1fr_0.9fr] items-center px-6 py-12 md:px-10 lg:px-14 min-h-[70vh]">
+        
+        {/* Left Column: Text Content and Details */}
+        <div className="space-y-7 text-center md:text-left z-20">
+          <motion.div 
+            initial={{ letterSpacing: "0.15em", opacity: 0, y: -10 }}
+            animate={{ letterSpacing: "0.25em", opacity: 1, y: 0 }}
+            transition={{ duration: 1.0, ease: "easeOut" }}
+            className="flex items-center justify-center md:justify-start gap-2 text-[9px] font-semibold uppercase tracking-[0.25em] text-[#c88e71]"
+          >
+            <span className="h-1.5 w-1.5 rounded-full bg-[#c88e71] animate-pulse" />
+            Refined Urban Living in Kampala
+          </motion.div>
+          
+          <div className="space-y-4">
+            <motion.h1 
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: { staggerChildren: 0.08, delayChildren: 0.2 }
+                }
+              }}
+              className="font-cinzel text-3xl font-light tracking-[0.2em] md:text-4xl lg:text-[2.75rem] leading-[1.1] flex flex-wrap justify-center md:justify-start overflow-hidden py-1"
+            >
+              {"LAVELLE".split("").map((char, index) => (
+                <motion.span
+                  key={index}
+                  variants={{
+                    hidden: { y: 40, opacity: 0 },
+                    visible: {
+                      y: 0,
+                      opacity: 1,
+                      transition: { type: "spring", damping: 15, stiffness: 130 }
+                    }
+                  }}
+                  className="bg-clip-text text-transparent bg-gradient-to-r from-white via-[#efc2aa] to-white inline-block select-none mr-[0.05em]"
+                >
+                  {char}
+                </motion.span>
+              ))}
+            </motion.h1>
+
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.7 }}
+              className="font-cormorant text-lg md:text-xl italic text-[#efc2aa] tracking-wide text-center md:text-left font-medium"
+            >
+              Bespoke apartments engineered for elevated living.
+            </motion.div>
+
+            <motion.p 
+              initial={{ y: 15, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.9 }}
+              className="text-xs md:text-sm leading-relaxed text-white/60 text-center md:text-left max-w-lg font-light"
+            >
+              Situated in Bugolobi's most desirable enclave, Lavelle combines modern architectural form with timeless interior finishes to create Kampala's premier boutique residence.
+            </motion.p>
+          </div>
+          
+          <motion.div 
+            initial={{ y: 15, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 1.15 }}
+            className="flex flex-wrap justify-center md:justify-start gap-3"
+          >
+            <Button
+              className="rounded-full bg-[#c88e71] px-6 py-5 text-xs text-black font-semibold hover:bg-[#ddb09a] transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#c88e71]/10"
+              onClick={() => onNavigate("residences")}
+            >
+              Explore Residences <ChevronRight className="ml-1.5 h-4 w-4" />
+            </Button>
+            <Button
+              variant="outline"
+              className="rounded-full border-white/15 bg-white/5 px-6 py-5 text-xs text-white hover:bg-white/10 transition-all duration-300 hover:scale-105"
+              onClick={() => onNavigate("contact")}
+            >
+              Book a Private Tour
+            </Button>
+          </motion.div>
+          
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 1.35 }}
+            className="flex items-center justify-center md:justify-start gap-6 pt-6 border-t border-white/5 max-w-md mx-auto md:mx-0 text-center md:text-left"
+          >
+            {[
+              ["24", "PREMIUM UNITS"],
+              ["04", "FLOORS"],
+              ["100%", "FULLY MANAGED"],
+            ].map(([val, label], idx) => (
+              <div key={label} className="flex gap-4 items-center">
+                {idx > 0 && <div className="h-6 w-[1px] bg-white/10 hidden md:block" />}
+                <div className="space-y-0.5">
+                  <div className="font-cinzel text-base md:text-lg font-medium text-white tracking-wider">{val}</div>
+                  <div className="text-[8px] font-semibold text-white/40 tracking-[0.15em]">{label}</div>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Right Column: Featured Video Card */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, scale: 0.97, x: 25 }}
+          animate={{ opacity: 1, scale: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.35 }}
           className="relative w-full"
         >
-          <div className="absolute -inset-8 rounded-[2rem] bg-[#c88e71]/15 blur-3xl" />
+          <div className="absolute -inset-4 rounded-[2rem] bg-[#c88e71]/8 blur-2xl pointer-events-none" />
           <div 
-            className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 p-3 shadow-2xl shadow-black/50 backdrop-blur-xl group transition-all duration-500 hover:border-white/20 hover:shadow-[#c88e71]/5"
+            className="relative overflow-hidden rounded-[1.8rem] border border-white/10 bg-white/5 p-2.5 shadow-2xl shadow-black/60 backdrop-blur-xl group transition-all duration-500 hover:border-white/15"
           >
             <div className="relative overflow-hidden rounded-[1.4rem]">
               <iframe
                 src={settings.heroVideoUrl}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                className="h-[500px] md:h-[680px] w-full object-cover transition-transform duration-700 group-hover:scale-105 pointer-events-none"
+                className="h-[280px] md:h-[390px] w-full object-cover transition-transform duration-700 group-hover:scale-[1.01] pointer-events-none border-0"
                 title="Lavelle Hero Video"
               />
             </div>
             
-            <div className="mt-4 rounded-[1.5rem] border border-white/10 bg-black/40 p-5 backdrop-blur-xl transition-transform duration-500 group-hover:-translate-y-1">
-              <div className="mb-3 flex flex-col md:flex-row md:items-center justify-between gap-4">
-                <div>
-                  <p className="text-sm uppercase tracking-[0.25em] text-[#efc2aa]">Featured Residence</p>
-                  <h3 className="text-2xl font-semibold text-white">Lavelle Signature</h3>
-                </div>
-                <Badge className="bg-white text-black hover:bg-white self-start md:self-auto">Available</Badge>
+            <div className="mt-3.5 rounded-2xl border border-white/5 bg-black/45 p-3.5 backdrop-blur-md flex items-center justify-between">
+              <div className="space-y-0.5 text-left">
+                <span className="text-[8px] font-semibold tracking-[0.2em] text-[#efc2aa] uppercase">Featured Residence</span>
+                <h4 className="text-sm font-semibold text-white">Lavelle Signature Suite</h4>
               </div>
-              <div className="grid grid-cols-3 gap-3 text-sm text-white/75">
-                <div className="rounded-xl bg-white/5 p-3 text-center md:text-left">3 Bedrooms</div>
-                <div className="rounded-xl bg-white/5 p-3 text-center md:text-left">3 Bathrooms</div>
-                <div className="rounded-xl bg-white/5 p-3 text-center md:text-left">176 sqm</div>
+              <div className="flex items-center gap-3 text-[10px] text-white/60">
+                <div>3 Bed</div>
+                <div className="h-2.5 w-[1px] bg-white/15" />
+                <div>3 Bath</div>
+                <div className="h-2.5 w-[1px] bg-white/15" />
+                <div>176 SQM</div>
               </div>
             </div>
           </div>
         </motion.div>
-
-        <motion.div 
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-          className="space-y-8 max-w-4xl mx-auto text-center md:text-left"
-        >
-          <div className="flex justify-center md:justify-start">
-            <Badge className="rounded-full border border-[#c88e71]/30 bg-[#c88e71]/10 px-4 py-1 text-[#efc2aa] hover:bg-[#c88e71]/10">
-              Refined Urban Living
-            </Badge>
-          </div>
-          <div className="space-y-5">
-            <h1 className="text-5xl font-semibold leading-[0.95] tracking-tight text-white md:text-7xl">
-              LAVELLE
-            </h1>
-            <p className="text-lg leading-8 text-white/65 md:text-xl">
-              A premium luxury residential development in Kampala, Uganda. Sophisticated apartments designed for refined urban living.
-            </p>
-          </div>
-          <div className="flex flex-wrap justify-center md:justify-start gap-3">
-            <Button
-              className="rounded-full bg-[#c88e71] px-6 text-black hover:bg-[#ddb09a]"
-              onClick={() => onNavigate("residences")}
-            >
-              Explore Residences <ChevronRight className="ml-2 h-4 w-4" />
-            </Button>
-            <Button
-              variant="outline"
-              className="rounded-full border-white/15 bg-white/5 px-6 text-white hover:bg-white/10"
-              onClick={() => onNavigate("contact")}
-            >
-              Book a Viewing
-            </Button>
-          </div>
-          <div className="grid gap-4 pt-4 sm:grid-cols-3">
-            {[
-              ["24+", "Premium units"],
-              ["4", "Floors"],
-              ["100%", "Fully managed"],
-            ].map(([a, b]) => (
-              <div key={a} className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur text-left">
-                <div className="text-2xl font-semibold text-white">{a}</div>
-                <div className="text-sm text-white/60">{b}</div>
-              </div>
-            ))}
-          </div>
-        </motion.div>
+        
       </div>
     </section>
   );
@@ -394,47 +486,167 @@ function AmenitiesSection() {
 }
 
 function GallerySection({ onImageClick }: { onImageClick: (img: string) => void }) {
-  const galleryLayout = [
-    "md:col-span-2 md:row-span-2",
-    "md:col-span-2 md:row-span-1",
-    "md:col-span-1 md:row-span-1",
-    "md:col-span-1 md:row-span-1",
-    "md:col-span-1 md:row-span-2",
-    "md:col-span-2 md:row-span-1",
-    "md:col-span-1 md:row-span-2",
-    "md:col-span-2 md:row-span-1",
-  ];
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  // Track scroll inside the gallery section
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
+
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  // Safely update the active index on scroll
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    const idx = Math.min(
+      Math.floor(latest * galleryItems.length),
+      galleryItems.length - 1
+    );
+    if (idx !== activeIndex) {
+      setActiveIndex(idx);
+    }
+  });
+
+  // Calculate transforms for each gallery image
+  const images = galleryItems.map((item, i) => {
+    const len = galleryItems.length;
+    const start = (i - 0.35) / len;
+    const peakStart = i / len;
+    const peakEnd = (i + 0.7) / len;
+    const end = (i + 1.05) / len;
+
+    // First image starts opaque, last image stays opaque at the end
+    const opacityRange = [
+      i === 0 ? 0 : start,
+      i === 0 ? 0 : peakStart,
+      i === len - 1 ? 1 : peakEnd,
+      i === len - 1 ? 1 : end
+    ];
+
+    const opacity = useTransform(
+      scrollYProgress,
+      opacityRange,
+      [0, 1, 1, 0]
+    );
+
+    const scale = useTransform(
+      scrollYProgress,
+      [start, end],
+      [1.0, 1.08],
+      { clamp: true }
+    );
+
+    return { ...item, opacity, scale };
+  });
 
   return (
-    <section className="space-y-8" id="gallery">
-      <SectionTitle
-        eyebrow="Gallery"
-        title="A cinematic view of life at Lavelle"
-        text="Renders, drone shots, lifestyle imagery, and staged interiors — all curated to build desire."
-      />
-      <div className="grid gap-4 grid-cols-1 md:grid-cols-4 auto-rows-[240px]">
-        {gallery.map((img, index) => (
-          <motion.div
-            key={img}
-            initial={{ opacity: 0, scale: 0.97 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.07 }}
-            className={`relative overflow-hidden rounded-[1.5rem] border border-white/10 group cursor-pointer ${galleryLayout[index] || ""}`}
-            onClick={() => onImageClick(img)}
-          >
-            <img
-              src={img}
-              alt={`Lavelle gallery ${index + 1}`}
-              className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-            />
-            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-500 flex items-center justify-center">
-              <ZoomIn className="text-white drop-shadow-xl opacity-0 group-hover:opacity-100 transition-all duration-500 h-10 w-10 scale-50 group-hover:scale-100" />
+    <div
+      ref={containerRef}
+      id="gallery"
+      className="relative h-[400vh] bg-[#060607] pt-12 pb-24 overflow-visible"
+    >
+      <div className="sticky top-0 h-screen w-full flex flex-col justify-between overflow-hidden py-8">
+        
+        {/* Sticky Header Section */}
+        <div className="w-full max-w-7xl mx-auto px-4 md:px-8 z-20">
+          <SectionTitle
+            eyebrow="Cinematic Gallery"
+            title="A walkthrough of life at Lavelle"
+            text="Scroll down to immerse yourself in the spaces, architectural facades, and premium amenities."
+          />
+        </div>
+
+        {/* Viewport Frame */}
+        <div className="w-full h-[55vh] md:h-[65vh] max-w-7xl mx-auto px-4 md:px-8 relative mt-6 mb-6">
+          <div className="relative w-full h-full overflow-hidden rounded-[2rem] border border-white/10 bg-black/60 shadow-2xl">
+            
+            {/* Absolute Images with Crossfade and Zoom */}
+            {images.map((item, i) => (
+              <motion.div
+                key={item.image}
+                style={{ opacity: item.opacity, scale: item.scale }}
+                className="absolute inset-0 w-full h-full cursor-pointer"
+                onClick={() => onImageClick(item.image)}
+              >
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-full object-cover"
+                />
+                {/* Subtle vignetting shadow inside the viewport */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/30 pointer-events-none" />
+              </motion.div>
+            ))}
+
+            {/* Floating Info Card (Bottom-Left) */}
+            <div className="absolute bottom-6 left-6 right-6 md:right-auto md:bottom-8 z-30 max-w-md bg-black/75 border border-white/10 rounded-[1.5rem] p-5 backdrop-blur-md shadow-2xl pointer-events-auto">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeIndex}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ duration: 0.35, ease: "easeOut" }}
+                  className="space-y-1.5 text-left"
+                >
+                  <span className="text-[9px] font-semibold uppercase tracking-[0.2em] text-[#efc2aa]">
+                    Residences Gallery — {activeIndex + 1} of {galleryItems.length}
+                  </span>
+                  <h3 className="text-lg font-bold text-white font-cinzel tracking-wider">
+                    {galleryItems[activeIndex].title}
+                  </h3>
+                  <p className="text-xs text-white/65 leading-relaxed font-light">
+                    {galleryItems[activeIndex].description}
+                  </p>
+                </motion.div>
+              </AnimatePresence>
             </div>
-          </motion.div>
-        ))}
+
+            {/* Floating Zoom Button (Bottom-Right) */}
+            <div className="absolute bottom-8 right-8 z-30 hidden md:block">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onImageClick(galleryItems[activeIndex].image);
+                }}
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-black/60 text-[#efc2aa] backdrop-blur-md transition hover:scale-105 hover:bg-black/80 hover:text-white"
+                title="Expand View"
+              >
+                <ZoomIn className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Floating Index Indicator (Top-Right) */}
+            <div className="absolute top-6 right-6 z-30 bg-black/65 border border-white/10 px-4 py-2 rounded-full backdrop-blur-md flex items-center gap-3">
+              <span className="font-cinzel text-xs font-semibold text-white tracking-wider">
+                {String(activeIndex + 1).padStart(2, "0")}
+              </span>
+              <div className="h-3 w-[1px] bg-white/20" />
+              <span className="font-cinzel text-xs font-semibold text-white/40 tracking-wider">
+                {String(galleryItems.length).padStart(2, "0")}
+              </span>
+            </div>
+
+            {/* Bottom Progress Bar */}
+            <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-white/10 z-35">
+              <motion.div
+                className="h-full bg-[#c88e71]"
+                style={{ scaleX: scrollYProgress, transformOrigin: "left" }}
+              />
+            </div>
+
+          </div>
+        </div>
+
+        {/* Scroll Helper Bottom indicator */}
+        <div className="w-full text-center z-20">
+          <p className="text-[10px] uppercase tracking-[0.3em] text-white/20">
+            Keep scrolling to walk through
+          </p>
+        </div>
+
       </div>
-    </section>
+    </div>
   );
 }
 
@@ -831,6 +1043,7 @@ export default function LavelleWebsite() {
     ["home", "Home"],
     ["about", "About"],
     ["residences", "Residences"],
+    ["interiors", "Interiors"],
     ["amenities", "Amenities"],
     ["gallery", "Gallery"],
     ["contact", "Contact"],
@@ -917,6 +1130,7 @@ export default function LavelleWebsite() {
           </div>
           <AboutSection />
           <ResidencesSection onImageClick={setSelectedImage} />
+          <InteriorShowcase />
           <AmenitiesSection />
           <GallerySection onImageClick={setSelectedImage} />
           <ContactSection />
@@ -953,7 +1167,7 @@ export default function LavelleWebsite() {
           <div>
             <div className="mb-3 font-semibold">Pages</div>
             <div className="grid gap-2 text-sm text-white/60">
-              {[["about", "About"], ["residences", "Residences"], ["gallery", "Gallery"], ["contact", "Contact"]].map(
+              {[["about", "About"], ["residences", "Residences"], ["interiors", "Interiors"], ["amenities", "Amenities"], ["gallery", "Gallery"], ["contact", "Contact"]].map(
                 ([id, label]) => (
                   <button key={id} className="text-left hover:text-white" onClick={() => scrollToSection(id)}>
                     {label}
