@@ -47,6 +47,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { db } from "@/lib/firebase";
+import { emailLeadNotification } from "@/lib/notify";
 import {
   collection,
   addDoc,
@@ -387,6 +388,13 @@ function RegisterInterestModal({ open, onClose }: { open: boolean; onClose: () =
         createdAt: serverTimestamp(),
       });
       setStatus("success");
+      // Fire-and-forget email copy to the sales inboxes
+      emailLeadNotification({
+        name: form.name,
+        phone: form.phone,
+        email: form.email,
+        source: "Register Interest Popup",
+      });
     } catch (err) {
       console.error("Firestore error:", err);
       setStatus("error");
@@ -1463,6 +1471,19 @@ function ContactSection() {
         createdAt: serverTimestamp(),
       });
       setStatus("success");
+      // Fire-and-forget email copy to the sales inboxes
+      emailLeadNotification({
+        name: form.name,
+        phone: form.phone,
+        email: form.email,
+        unit: form.unit,
+        budget: form.budget,
+        timeline: form.timeline,
+        message: form.message,
+        siteVisitRequested: form.siteVisitRequested ? "Yes" : "No",
+        preferredVisitDate: form.preferredVisitDate || "—",
+        source: "Website Form",
+      });
       setForm(EMPTY_FORM);
     } catch (err) {
       console.error("Firestore error:", err);
