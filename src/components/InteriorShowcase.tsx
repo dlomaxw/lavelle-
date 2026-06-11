@@ -390,6 +390,9 @@ export default function InteriorShowcase() {
               <p className="text-sm font-medium text-white/50 tracking-wide">
                 {activeSpace.subtitle}
               </p>
+              <p className="max-w-xl pt-1 text-xs leading-relaxed text-[#efc2aa]/80">
+                A specially designed signature theme runs throughout the building — earthy tones and natural finishes complementing the green backdrop, with 3.2M ceilings and panoramic terraces in every residence.
+              </p>
             </div>
             
             <div className="max-w-md">

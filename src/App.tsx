@@ -3,6 +3,7 @@ import { motion, AnimatePresence, useScroll, useTransform, useMotionValueEvent }
 import {
   Building2,
   Phone,
+  Mail,
   MapPin,
   BedDouble,
   Bath,
@@ -23,6 +24,21 @@ import {
   Sparkles,
   ZoomIn,
   Sun,
+  Download,
+  FileText,
+  BookOpen,
+  GraduationCap,
+  ShoppingBag,
+  Factory,
+  Plane,
+  Landmark,
+  Trees,
+  Zap,
+  Droplets,
+  ArrowUpDown,
+  Baby,
+  CreditCard,
+  CalendarCheck,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import InteriorShowcase from "@/components/InteriorShowcase";
@@ -45,6 +61,7 @@ export const DEFAULT_SETTINGS = {
   heroVideoUrl: "https://www.youtube.com/embed/bQaBlh1N7IA?autoplay=1&mute=1&controls=0&loop=1&playlist=bQaBlh1N7IA&rel=0&playsinline=1&vq=hd1080",
   waNumber: "256791224477",
   contactPhone: "+256 791 224 477",
+  contactEmail: "sales@lavelleresidences.com",
   residence1Price: "$168,000",
   residence2Price: "$245,000",
   residence3Price: "$390,000"
@@ -71,105 +88,261 @@ async function trackPageVisit() {
 const residences = [
   {
     id: 1,
-    name: "Skyline Suite",
-    price: "$168,000",
+    name: "2 BHK Residences",
+    units: 15,
     beds: 2,
     baths: 2,
     size: "118 sqm",
-    status: "Available",
-    image:
-      "/renders/3d render (1).png",
+    status: "15 Units",
+    image: "/exterior/lavelle-balcony-detail.jpg",
     blurb:
-      "Open-plan city residence with warm finishes, panoramic glazing, and private balcony living.",
+      "Open-plan two-bedroom homes with warm earthy finishes, panoramic glazing, and private terrace living.",
   },
   {
     id: 2,
-    name: "Lavelle Signature",
-    price: "$245,000",
+    name: "3 BHK Residences",
+    units: 16,
     beds: 3,
     baths: 3,
     size: "176 sqm",
-    status: "Reserved",
-    image:
-      "/renders/3d render (2).png",
+    status: "16 Units",
+    image: "/exterior/lavelle-building-day.jpg",
     blurb:
-      "A premium family apartment designed for long-term comfort, privacy, and elevated everyday living.",
+      "Generous three-bedroom family residences designed for long-term comfort, privacy, and elevated everyday living.",
   },
   {
     id: 3,
-    name: "Penthouse Horizon",
-    price: "$390,000",
+    name: "Penthouses",
+    units: 4,
     beds: 4,
     baths: 4,
     size: "248 sqm",
-    status: "New",
-    image:
-      "/renders/3d render (3).png",
+    status: "4 Units",
+    image: "/exterior/lavelle-rooftop-aerial.jpg",
     blurb:
-      "Expansive top-floor residence with statement interiors, entertaining zones, and skyline-facing terraces.",
+      "Four exclusive top-floor penthouses with statement interiors, entertaining zones, and sweeping skyline-facing terraces.",
   },
 ];
 
 const amenities = [
-  { icon: Waves, title: "Pool Deck", text: "Resort-inspired water and lounge experience." },
+  { icon: ArrowUpDown, title: "3 High-Speed Elevators", text: "Three passenger elevators serving every floor — no waiting, no queues." },
+  { icon: Car, title: "Podium & Basement Parking", text: "Generous controlled-access resident and visitor parking across two podium levels." },
+  { icon: ShieldCheck, title: "24/7 Security & CCTV", text: "Gated perimeter, manned gatehouse, and round-the-clock monitoring." },
   { icon: Dumbbell, title: "Fitness Studio", text: "Contemporary training space for daily wellness." },
-  { icon: Car, title: "Secure Parking", text: "Controlled-access basement and visitor parking." },
-  { icon: ShieldCheck, title: "24/7 Security", text: "Round-the-clock access control and monitoring." },
-  { icon: Users, title: "Resident Lounge", text: "Refined shared spaces for meetings and downtime." },
-  { icon: Building2, title: "Modern Architecture", text: "A sleek façade with premium urban presence." },
+  { icon: Waves, title: "Pool & Wellness Deck", text: "Resort-inspired water and lounge experience under the Kampala sun." },
+  { icon: Baby, title: "Children's Play Area", text: "Dedicated, safely fenced outdoor play zone within the gardens." },
+  { icon: Trees, title: "Landscaped Gardens & Lounge", text: "Garden seating courts, pergolas, and a fire-pit lounge wrapped in greenery." },
+  { icon: Zap, title: "Full Backup Power", text: "Standby generator power keeps every residence and amenity running." },
+  { icon: Droplets, title: "Water Reserves", text: "Rooftop reserve tanks and treatment for uninterrupted water supply." },
+  { icon: Users, title: "Resident Lounge & Reception", text: "Refined double-height lobby and shared spaces for meetings and downtime." },
+  { icon: Building2, title: "Boutique Community", text: "Only 35 residences — a private, low-density address." },
+  { icon: Sparkles, title: "Fully Managed Building", text: "Professional facilities management and concierge-style services." },
 ];
 
-const galleryItems = [
+const exteriorGallery = [
   {
-    image: "/renders/3d render (4).png",
-    title: "Lavelle Façade",
-    description: "A striking architectural statement showcasing modern verticality, premium glass balconies, and warm wooden accents."
+    image: "/exterior/lavelle-building-day.jpg",
+    title: "Lavelle by Day",
+    description: "The full architectural form — bronze portal frames, planted balconies, and the illuminated Lavelle crown rising above Bugolobi."
   },
   {
-    image: "/renders/3d render (5).png",
-    title: "Grand Entryway",
-    description: "The secure landscaped entrance, greeting residents and guests with native Ugandan plantings and soft ambient lighting."
+    image: "/exterior/lavelle-tower-portrait.jpg",
+    title: "The Tower",
+    description: "Twelve levels of layered stone, timber, and glass — the complete Lavelle silhouette above the open podium decks."
   },
   {
-    image: "/renders/3d render (7).png",
-    title: "Sunset Balcony View",
-    description: "Private outdoor terrace offering open-air seating and beautiful panoramic vistas of the Kampala skyline."
+    image: "/exterior/lavelle-front-elevation.jpg",
+    title: "Front Elevation",
+    description: "The signature facade: sculpted timber-clad frames wrapping cascading green terraces across every level."
   },
   {
-    image: "/renders/3d render (8).png",
-    title: "Premium Reception & Lobby",
-    description: "Double-height ground floor reception desk with fluted timber panels and premium stone floor details."
+    image: "/exterior/lavelle-facade-low-angle.jpg",
+    title: "Rising Above",
+    description: "A street-level perspective of the tower's dramatic verticality, framed louvres, and panoramic glass balustrades."
   },
   {
-    image: "/renders/3d render (11).png",
-    title: "Rooftop Dining Deck",
-    description: "An outdoor entertaining terrace equipped with premium dining layouts, BBQ stations, and skyline views."
+    image: "/exterior/lavelle-entrance-dusk.jpg",
+    title: "Arrival at Dusk",
+    description: "The gated entrance and porte-cochère glowing warmly at sunset, with the backlit Lavelle monument sign welcoming you home."
   },
   {
-    image: "/renders/3d render (12).png",
-    title: "Skyline Pool & Wellness Deck",
-    description: "Elevated swimming pool and sun loungers designed for daily relaxation and recreation under the Kampala sun."
+    image: "/exterior/lavelle-gate-evening.jpg",
+    title: "The Gatehouse",
+    description: "Street view of the illuminated Lavelle stone sign, guarded entry, and the covered drop-off beyond."
   },
   {
-    image: "/renders/3d render (14).png",
-    title: "Modern Facade Detail",
-    description: "Close-up detailing of the bespoke bronze framing, premium glass panels, and external column structures."
+    image: "/exterior/lavelle-aerial-entrance.jpg",
+    title: "The Entrance Court",
+    description: "An aerial look at the drop-off canopy, guarded gate, and landscaped arrival sequence beneath the green facade."
   },
   {
-    image: "/renders/3d render (15).png",
-    title: "Evening Residence View",
-    description: "The building illuminated at night, highlighting the warm interior layouts and architectural geometry."
+    image: "/exterior/lavelle-entrance-aerial-dusk.jpg",
+    title: "Evening Arrival",
+    description: "Dusk settles over the entrance court — edge-lit parking bays, the basement ramp, and gardens glowing at the perimeter."
+  },
+  {
+    image: "/exterior/lavelle-rooftop-aerial.jpg",
+    title: "The Rooftop Crown",
+    description: "A bird's-eye view over the rooftop terraces, skylight atrium, and dedicated water reserve farm serving the building."
+  },
+  {
+    image: "/exterior/lavelle-parking-deck.jpg",
+    title: "Podium Parking",
+    description: "Wide, edge-lit parking bays on the open podium deck — generous space for residents and guests, steps from the elevators."
+  },
+  {
+    image: "/exterior/lavelle-garden-walkway.jpg",
+    title: "Garden Walkway",
+    description: "The landscaped promenade along the podium edge — lawn courts, a fire-pit circle, and benches under flowering trees."
+  },
+  {
+    image: "/exterior/lavelle-playground.jpg",
+    title: "Children's Playground",
+    description: "A safely fenced play court with swings, slides, and pergola seating where parents can watch from the shade."
   }
+];
+
+const interiorGallery = [
+  {
+    image: "/renders/interior-living-1.jpg",
+    title: "The Main Salon",
+    description: "Bookmatched Calacatta panels, curved bouclé seating, and bespoke ring lighting in the open-plan living lounge."
+  },
+  {
+    image: "/renders/interior-living-2.jpg",
+    title: "The Dining Hall",
+    description: "A formal dining suite in Nero Marquina marble framed by sculptural mirrors and raw-pigment artwork."
+  },
+  {
+    image: "/renders/interior-kitchen.jpg",
+    title: "Culinary Studio",
+    description: "Warm walnut joinery and cream lacquered cabinetry with fully integrated smart appliances."
+  },
+  {
+    image: "/renders/interior-bedroom-1.jpg",
+    title: "Master Sanctuary",
+    description: "Fluted oak bedhead wall, ambient sconces, and layered earthy textiles beneath 3.2-metre ceilings."
+  },
+  {
+    image: "/renders/interior-bedroom-2.jpg",
+    title: "Junior Suite",
+    description: "Vertical timber paneling and soft pendant lighting create a calm, restorative guest retreat."
+  },
+  {
+    image: "/renders/interior-closet.jpg",
+    title: "Dressing Closet",
+    description: "Concealed wardrobe systems, a back-lit vanity mirror, and herringbone oak parquet underfoot."
+  },
+  {
+    image: "/renders/interior-bathroom-1.jpg",
+    title: "Wellness Bath",
+    description: "A freestanding stone tub on an oak platform with slate-textured walls and a recessed rainfall shower."
+  },
+  {
+    image: "/renders/interior-bathroom-2.jpg",
+    title: "Powder Vanity",
+    description: "A floating timber console, vessel basin, and halo-lit mirror in spa-inspired earthy tones."
+  }
+];
+
+const locationSpots = [
+  { icon: ShoppingBag, name: "Village Mall, Bugolobi", time: "4 min", detail: "Shopping, dining & daily essentials" },
+  { icon: Factory, name: "Industrial Area", time: "6 min", detail: "Kampala's business & enterprise hub" },
+  { icon: GraduationCap, name: "Top Schools", time: "8 min", detail: "International & primary schools nearby" },
+  { icon: Landmark, name: "Kampala CBD", time: "12 min", detail: "Banks, offices & city centre" },
+  { icon: ShoppingBag, name: "Kololo & Acacia Mall", time: "14 min", detail: "Premium lifestyle & leisure district" },
+  { icon: Plane, name: "Entebbe Int'l Airport", time: "45 min", detail: "Direct via the Expressway" },
+];
+
+const paymentPlans = [
+  {
+    icon: CheckSquare,
+    title: "Reserve Your Residence",
+    text: "Secure your preferred unit with a simple booking deposit and personalised offer letter.",
+  },
+  {
+    icon: CreditCard,
+    title: "Structured Installments",
+    text: "Spread payments across construction milestones in a schedule shaped around your cash flow.",
+  },
+  {
+    icon: CalendarCheck,
+    title: "Settle on Handover",
+    text: "Clear the comfortable balance at completion and collect the keys to your new home.",
+  },
+];
+
+const whyLavelle = [
+  { icon: Building2, text: "A boutique community of only 35 residences — private and low-density." },
+  { icon: Sparkles, text: "Signature earthy interiors with 3.2M ceilings and panoramic terraces." },
+  { icon: MapPin, text: "Prime Bugolobi address — minutes from malls, schools, and the CBD." },
+  { icon: ArrowUpDown, text: "3 high-speed elevators, full backup power, and water reserves." },
+  { icon: Trees, text: "Cascading green facade and landscaped gardens on every side." },
+  { icon: CreditCard, text: "Flexible payment plans tailored around you." },
 ];
 
 // ─── Shared helpers ───────────────────────────────────────────────────────────
 
+// Word-by-word rising reveal, triggered when scrolled into view.
+function AnimatedWords({ text, className }: { text: string; className?: string }) {
+  return (
+    <motion.span
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-40px" }}
+      variants={{
+        hidden: {},
+        visible: { transition: { staggerChildren: 0.045 } },
+      }}
+      className={className}
+    >
+      {text.split(" ").map((word, i) => (
+        <span key={i} className="inline-block overflow-hidden align-top pb-1 -mb-1">
+          <motion.span
+            variants={{
+              hidden: { y: "110%", opacity: 0 },
+              visible: {
+                y: 0,
+                opacity: 1,
+                transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] },
+              },
+            }}
+            className="inline-block"
+          >
+            {word}{" "}
+          </motion.span>
+        </span>
+      ))}
+    </motion.span>
+  );
+}
+
 function SectionTitle({ eyebrow, title, text }: { eyebrow: string; title: string; text?: string }) {
   return (
     <div className="max-w-2xl space-y-3">
-      <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[#c88e71]">{eyebrow}</p>
-      <h2 className="text-3xl font-semibold tracking-tight text-white md:text-4xl">{title}</h2>
-      {text ? <p className="text-sm leading-7 text-white/65 md:text-base">{text}</p> : null}
+      <motion.p
+        initial={{ opacity: 0, x: -16, letterSpacing: "0.2em" }}
+        whileInView={{ opacity: 1, x: 0, letterSpacing: "0.35em" }}
+        viewport={{ once: true, margin: "-40px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="text-xs font-semibold uppercase text-[#c88e71]"
+      >
+        {eyebrow}
+      </motion.p>
+      <h2 className="text-3xl font-semibold tracking-tight text-white md:text-4xl">
+        <AnimatedWords text={title} />
+      </h2>
+      {text ? (
+        <motion.p
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.6, delay: 0.25, ease: "easeOut" }}
+          className="text-sm leading-7 text-white/65 md:text-base"
+        >
+          {text}
+        </motion.p>
+      ) : null}
     </div>
   );
 }
@@ -187,6 +360,174 @@ function NavLink({ active, onClick, children }: { active: boolean; onClick: () =
   );
 }
 
+// ─── Register Your Interest popup ─────────────────────────────────────────────
+
+function RegisterInterestModal({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const settings = React.useContext(SettingsContext);
+  const [form, setForm] = useState({ name: "", phone: "", email: "" });
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  const handleSubmit = async () => {
+    if (!form.name || !form.phone) return;
+    setStatus("loading");
+    try {
+      await addDoc(collection(db, "leads"), {
+        name: form.name,
+        phone: form.phone,
+        email: form.email,
+        unit: "",
+        budget: "",
+        timeline: "",
+        message: "Registered interest via welcome popup",
+        siteVisitRequested: false,
+        preferredVisitDate: null,
+        source: "Register Interest Popup",
+        status: "New",
+        createdAt: serverTimestamp(),
+      });
+      setStatus("success");
+    } catch (err) {
+      console.error("Firestore error:", err);
+      setStatus("error");
+    }
+  };
+
+  return (
+    <AnimatePresence>
+      {open && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.35 }}
+          className="fixed inset-0 z-[150] flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
+          onClick={onClose}
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.92, y: 24 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 16 }}
+            transition={{ type: "spring", damping: 22, stiffness: 240 }}
+            className="relative w-full max-w-md overflow-hidden rounded-[1.8rem] border border-white/10 bg-[#121216] text-white shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header image */}
+            <div className="relative h-36 w-full overflow-hidden">
+              <img
+                src="/exterior/lavelle-entrance-dusk.jpg"
+                alt="Lavelle entrance"
+                className="h-full w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#121216] via-black/30 to-transparent" />
+              <button
+                className="absolute right-4 top-4 rounded-full bg-black/50 p-2 text-white/80 backdrop-blur-md transition hover:bg-black/80 hover:text-white"
+                onClick={onClose}
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+
+            <div className="space-y-4 p-6 pt-4">
+              {status === "success" ? (
+                <div className="space-y-4 py-4 text-center">
+                  <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-400/15 text-emerald-300">
+                    <CheckSquare className="h-7 w-7" />
+                  </div>
+                  <h3 className="font-cinzel text-xl tracking-wider">Thank You!</h3>
+                  <p className="text-sm text-white/60">
+                    Your interest is registered. Our sales team will reach out shortly.
+                  </p>
+                  <Button
+                    className="rounded-full bg-[#c88e71] px-6 text-black hover:bg-[#ddb09a]"
+                    onClick={onClose}
+                  >
+                    Explore Lavelle
+                  </Button>
+                </div>
+              ) : (
+                <>
+                  <div className="space-y-1.5 text-center">
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#c88e71]">Welcome to Lavelle</p>
+                    <h3 className="font-cinzel text-2xl tracking-wider">Register Your Interest</h3>
+                    <p className="text-xs text-white/55">
+                      Only 35 residences. Leave your details and be the first to receive prices, plans, and availability.
+                    </p>
+                  </div>
+
+                  <div className="space-y-3">
+                    <Input
+                      value={form.name}
+                      onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))}
+                      className="h-11 rounded-xl border-white/10 bg-black/30 text-white placeholder:text-white/40"
+                      placeholder="Full name *"
+                    />
+                    <Input
+                      value={form.phone}
+                      onChange={(e) => setForm((p) => ({ ...p, phone: e.target.value }))}
+                      className="h-11 rounded-xl border-white/10 bg-black/30 text-white placeholder:text-white/40"
+                      placeholder="Phone number *"
+                    />
+                    <Input
+                      value={form.email}
+                      onChange={(e) => setForm((p) => ({ ...p, email: e.target.value }))}
+                      className="h-11 rounded-xl border-white/10 bg-black/30 text-white placeholder:text-white/40"
+                      placeholder="Email address"
+                    />
+                  </div>
+
+                  {status === "error" && (
+                    <p className="text-xs text-red-300">Something went wrong — please try again or use WhatsApp below.</p>
+                  )}
+
+                  <Button
+                    className="w-full rounded-full bg-[#c88e71] py-5 text-sm font-semibold text-black hover:bg-[#ddb09a] disabled:opacity-60"
+                    onClick={handleSubmit}
+                    disabled={status === "loading" || !form.name || !form.phone}
+                  >
+                    {status === "loading" ? (
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    ) : (
+                      <Send className="mr-2 h-4 w-4" />
+                    )}
+                    Register My Interest
+                  </Button>
+
+                  {/* Direct contact channels */}
+                  <div className="grid grid-cols-3 gap-2 border-t border-white/10 pt-4">
+                    <a
+                      href={`tel:${settings.contactPhone.replace(/\s/g, "")}`}
+                      className="flex flex-col items-center gap-1.5 rounded-2xl bg-white/5 p-3 text-center transition hover:bg-white/10"
+                    >
+                      <Phone className="h-4 w-4 text-[#efc2aa]" />
+                      <span className="text-[9px] text-white/60">Call Us</span>
+                    </a>
+                    <a
+                      href={`mailto:${settings.contactEmail}`}
+                      className="flex flex-col items-center gap-1.5 rounded-2xl bg-white/5 p-3 text-center transition hover:bg-white/10"
+                    >
+                      <Mail className="h-4 w-4 text-[#efc2aa]" />
+                      <span className="text-[9px] text-white/60">Email</span>
+                    </a>
+                    <a
+                      href={`https://wa.me/${settings.waNumber}?text=Hello%20Lavelle%2C%20I%27d%20like%20to%20register%20my%20interest.`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex flex-col items-center gap-1.5 rounded-2xl bg-white/5 p-3 text-center transition hover:bg-white/10"
+                    >
+                      <MessageCircle className="h-4 w-4 text-[#25D366]" />
+                      <span className="text-[9px] text-white/60">WhatsApp</span>
+                    </a>
+                  </div>
+                </>
+              )}
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
 // ─── Sections ─────────────────────────────────────────────────────────────────
 
 function Hero({ onNavigate, onImageClick }: { onNavigate: (id: string) => void; onImageClick: (img: string) => void }) {
@@ -194,39 +535,39 @@ function Hero({ onNavigate, onImageClick }: { onNavigate: (id: string) => void; 
   return (
     <section className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#0b0b0d]">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(200,142,113,0.18),transparent_35%),radial-gradient(circle_at_left,rgba(255,255,255,0.06),transparent_30%)] pointer-events-none" />
-      
+
       {/* Floating Animated Icons */}
-      <motion.div 
-        animate={{ y: [0, -12, 0], rotate: [0, 5, 0] }} 
+      <motion.div
+        animate={{ y: [0, -12, 0], rotate: [0, 5, 0] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
         className="absolute top-16 left-[40%] text-[#c88e71]/20 hidden lg:block"
       >
         <Sun className="h-8 w-8" />
       </motion.div>
-      <motion.div 
-        animate={{ y: [0, 15, 0], rotate: [0, -4, 0] }} 
+      <motion.div
+        animate={{ y: [0, 15, 0], rotate: [0, -4, 0] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         className="absolute bottom-16 left-6 text-[#c88e71]/5 hidden md:block animate-pulse"
       >
         <Building2 className="h-16 w-16" />
       </motion.div>
-      
+
       <div className="relative grid gap-12 lg:grid-cols-[1.1fr_0.9fr] items-center px-6 py-12 md:px-10 lg:px-14 min-h-[70vh]">
-        
+
         {/* Left Column: Text Content and Details */}
         <div className="space-y-7 text-center md:text-left z-20">
-          <motion.div 
+          <motion.div
             initial={{ letterSpacing: "0.15em", opacity: 0, y: -10 }}
             animate={{ letterSpacing: "0.25em", opacity: 1, y: 0 }}
             transition={{ duration: 1.0, ease: "easeOut" }}
             className="flex items-center justify-center md:justify-start gap-2 text-[9px] font-semibold uppercase tracking-[0.25em] text-[#c88e71]"
           >
             <span className="h-1.5 w-1.5 rounded-full bg-[#c88e71] animate-pulse" />
-            Refined Urban Living in Kampala
+            Refined Urban Living in Bugolobi, Kampala
           </motion.div>
-          
+
           <div className="space-y-4">
-            <motion.h1 
+            <motion.h1
               initial="hidden"
               animate="visible"
               variants={{
@@ -262,20 +603,20 @@ function Hero({ onNavigate, onImageClick }: { onNavigate: (id: string) => void; 
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.7 }}
               className="font-cormorant text-lg md:text-xl italic text-[#efc2aa] tracking-wide text-center md:text-left font-medium"
             >
-              Bespoke apartments engineered for elevated living.
+              35 bespoke residences engineered for elevated living.
             </motion.div>
 
-            <motion.p 
+            <motion.p
               initial={{ y: 15, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.9 }}
               className="text-xs md:text-sm leading-relaxed text-white/60 text-center md:text-left max-w-lg font-light"
             >
-              Situated in Bugolobi's most desirable enclave, Lavelle combines modern architectural form with timeless interior finishes to create Kampala's premier boutique residence.
+              Situated in Bugolobi's most desirable enclave, Lavelle combines modern architectural form with a signature earthy interior theme, 3.2M ceilings, and panoramic terraces — Kampala's premier boutique residence.
             </motion.p>
           </div>
-          
-          <motion.div 
+
+          <motion.div
             initial={{ y: 15, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 1.15 }}
@@ -292,20 +633,20 @@ function Hero({ onNavigate, onImageClick }: { onNavigate: (id: string) => void; 
               className="rounded-full border-white/15 bg-white/5 px-6 py-5 text-xs text-white hover:bg-white/10 transition-all duration-300 hover:scale-105"
               onClick={() => onNavigate("contact")}
             >
-              Book a Private Tour
+              Book a Private Viewing
             </Button>
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 1.35 }}
             className="flex items-center justify-center md:justify-start gap-6 pt-6 border-t border-white/5 max-w-md mx-auto md:mx-0 text-center md:text-left"
           >
             {[
-              ["24", "PREMIUM UNITS"],
-              ["04", "FLOORS"],
-              ["100%", "FULLY MANAGED"],
+              ["35", "RESIDENCES"],
+              ["03", "ELEVATORS"],
+              ["3.2M", "CEILING HEIGHT"],
             ].map(([val, label], idx) => (
               <div key={label} className="flex gap-4 items-center">
                 {idx > 0 && <div className="h-6 w-[1px] bg-white/10 hidden md:block" />}
@@ -326,7 +667,7 @@ function Hero({ onNavigate, onImageClick }: { onNavigate: (id: string) => void; 
           className="relative w-full"
         >
           <div className="absolute -inset-4 rounded-[2rem] bg-[#c88e71]/8 blur-2xl pointer-events-none" />
-          <div 
+          <div
             className="relative overflow-hidden rounded-[1.8rem] border border-white/10 bg-white/5 p-2.5 shadow-2xl shadow-black/60 backdrop-blur-xl group transition-all duration-500 hover:border-white/15"
           >
             <div className="relative overflow-hidden rounded-[1.4rem]">
@@ -337,11 +678,11 @@ function Hero({ onNavigate, onImageClick }: { onNavigate: (id: string) => void; 
                 title="Lavelle Hero Video"
               />
             </div>
-            
+
             <div className="mt-3.5 rounded-2xl border border-white/5 bg-black/45 p-3.5 backdrop-blur-md flex items-center justify-between">
               <div className="space-y-0.5 text-left">
                 <span className="text-[8px] font-semibold tracking-[0.2em] text-[#efc2aa] uppercase">Featured Residence</span>
-                <h4 className="text-sm font-semibold text-white">Lavelle Signature Suite</h4>
+                <h4 className="text-sm font-semibold text-white">Lavelle 3 BHK Signature</h4>
               </div>
               <div className="flex items-center gap-3 text-[10px] text-white/60">
                 <div>3 Bed</div>
@@ -353,7 +694,125 @@ function Hero({ onNavigate, onImageClick }: { onNavigate: (id: string) => void; 
             </div>
           </div>
         </motion.div>
-        
+
+      </div>
+    </section>
+  );
+}
+
+function AboutSection() {
+  return (
+    <section className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]" id="about">
+      <Card className="rounded-[1.8rem] border-white/10 bg-[#121216] text-white">
+        <CardContent className="p-8">
+          <SectionTitle
+            eyebrow="About Us"
+            title="Lavelle — a boutique address in the heart of Bugolobi"
+            text="Lavelle is an exclusive collection of 35 bespoke residences rising above Bugolobi's greenest enclave. Architecturally bold yet quietly refined, it pairs a signature earthy interior theme with cascading planted terraces, 3.2-metre ceilings, and panoramic views — a home built for those who value design, comfort, and enduring value."
+          />
+        </CardContent>
+      </Card>
+      <Card className="rounded-[1.8rem] border-white/10 bg-white/5 text-white">
+        <CardContent className="grid gap-6 p-8 md:grid-cols-2">
+          {[
+            [
+              "Prime location",
+              "Minutes from Village Mall, the Industrial Area, top schools, and the Kampala CBD.",
+            ],
+            [
+              "Boutique by design",
+              "Only 35 homes — 2 BHK, 3 BHK, and penthouse residences — for a private, low-density community.",
+            ],
+            [
+              "Signature interiors",
+              "Earthy tones and natural finishes complementing the green backdrop, with 3.2M ceilings throughout.",
+            ],
+            [
+              "Built to last",
+              "Three elevators, full backup power, water reserves, and professional building management.",
+            ],
+          ].map(([title, body]) => (
+            <div key={title} className="rounded-[1.2rem] bg-black/30 p-5">
+              <h3 className="text-lg font-semibold">{title}</h3>
+              <p className="mt-2 text-sm leading-7 text-white/65">{body}</p>
+            </div>
+          ))}
+        </CardContent>
+      </Card>
+    </section>
+  );
+}
+
+function WhyLavelleSection({ onImageClick }: { onImageClick: (img: string) => void }) {
+  return (
+    <section className="space-y-8" id="why">
+      <SectionTitle
+        eyebrow="Why Lavelle?"
+        title="A residence that answers every question"
+        text="From the architecture to the address, every decision at Lavelle was made to protect your lifestyle and your investment."
+      />
+      <div className="grid gap-8 lg:grid-cols-[1fr_1.05fr] items-center">
+        {/* Animated feature image */}
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="relative group cursor-pointer"
+          onClick={() => onImageClick("/exterior/lavelle-front-elevation.jpg")}
+        >
+          <div className="absolute -inset-3 rounded-[2rem] bg-[#c88e71]/10 blur-2xl pointer-events-none" />
+          <div className="relative overflow-hidden rounded-[2rem] border border-white/10 shadow-2xl shadow-black/60">
+            <motion.img
+              src="/exterior/lavelle-front-elevation.jpg"
+              alt="Lavelle front elevation"
+              className="h-[420px] md:h-[520px] w-full object-cover transition-transform duration-[1200ms] group-hover:scale-110"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+            {/* Floating stat badges */}
+            <motion.div
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute left-5 top-5 rounded-2xl border border-white/10 bg-black/60 px-4 py-3 backdrop-blur-md"
+            >
+              <div className="font-cinzel text-lg text-white">35</div>
+              <div className="text-[9px] uppercase tracking-[0.2em] text-white/50">Residences Only</div>
+            </motion.div>
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+              className="absolute right-5 bottom-16 rounded-2xl border border-white/10 bg-black/60 px-4 py-3 backdrop-blur-md"
+            >
+              <div className="font-cinzel text-lg text-[#efc2aa]">3.2M</div>
+              <div className="text-[9px] uppercase tracking-[0.2em] text-white/50">Ceiling Height</div>
+            </motion.div>
+            <div className="absolute bottom-5 left-5 flex items-center gap-2 rounded-full border border-white/10 bg-black/60 px-4 py-2 backdrop-blur-md text-[10px] uppercase tracking-[0.2em] text-[#efc2aa]">
+              <ZoomIn className="h-3.5 w-3.5" /> Tap to expand
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Reasons list */}
+        <div className="grid gap-4">
+          {whyLavelle.map((item, i) => {
+            const Icon = item.icon;
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="flex items-center gap-4 rounded-[1.4rem] border border-white/10 bg-white/5 p-5 transition-all duration-300 hover:border-[#c88e71]/30 hover:bg-white/10 hover:translate-x-2"
+              >
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#c88e71]/15 text-[#efc2aa]">
+                  <Icon className="h-5 w-5" />
+                </div>
+                <p className="text-sm leading-6 text-white/75">{item.text}</p>
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
@@ -363,11 +822,36 @@ function ResidencesSection({ onImageClick }: { onImageClick: (img: string) => vo
   const settings = React.useContext(SettingsContext);
   return (
     <section className="space-y-8" id="residences">
-      <SectionTitle
-        eyebrow="Residences"
-        title="Curated units with pricing, specs, and direct inquiry"
-        text="Each listing is structured to convert. View details, shortlist your preferred home, and move directly into a sales conversation."
-      />
+      <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <SectionTitle
+          eyebrow="The Residences"
+          title="35 bespoke residences. Three ways to live."
+          text="A curated unit mix of two-bedroom homes, three-bedroom family residences, and four crowning penthouses — each with a private terrace and the Lavelle signature interior theme."
+        />
+        {/* Unit mix summary */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="flex items-center gap-5 rounded-[1.4rem] border border-white/10 bg-white/5 px-6 py-4 self-start"
+        >
+          {[
+            ["15", "2 BHK"],
+            ["16", "3 BHK"],
+            ["04", "PENTHOUSES"],
+          ].map(([val, label], idx) => (
+            <div key={label} className="flex items-center gap-5">
+              {idx > 0 && <div className="h-7 w-[1px] bg-white/10" />}
+              <div className="text-center">
+                <div className="font-cinzel text-xl text-[#efc2aa]">{val}</div>
+                <div className="text-[9px] font-semibold tracking-[0.2em] text-white/45">{label}</div>
+              </div>
+            </div>
+          ))}
+        </motion.div>
+      </div>
+
       <div className="grid gap-6 lg:grid-cols-3">
         {residences.map((item) => (
           <motion.div
@@ -378,7 +862,7 @@ function ResidencesSection({ onImageClick }: { onImageClick: (img: string) => vo
             transition={{ duration: 0.5, delay: item.id * 0.1 }}
           >
             <Card className="overflow-hidden rounded-[1.6rem] border-white/10 bg-white/5 text-white backdrop-blur-xl h-full transition-all duration-500 hover:border-white/20 hover:bg-white/10 hover:-translate-y-2 hover:shadow-2xl hover:shadow-black/60 group">
-              <div 
+              <div
                 className="relative overflow-hidden cursor-pointer"
                 onClick={() => onImageClick(item.image)}
               >
@@ -395,13 +879,28 @@ function ResidencesSection({ onImageClick }: { onImageClick: (img: string) => vo
                 </Badge>
               </div>
               <CardContent className="space-y-5 p-6">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <h3 className="text-2xl font-semibold">{item.name}</h3>
-                    <p className="mt-2 text-sm leading-7 text-white/65">{item.blurb}</p>
-                  </div>
-                  <div className="text-right text-lg font-semibold text-[#efc2aa] whitespace-nowrap">
-                    {item.id === 1 ? settings.residence1Price : item.id === 2 ? settings.residence2Price : settings.residence3Price}
+                <div className="space-y-2">
+                  <h3 className="text-2xl font-semibold">{item.name}</h3>
+                  <p className="text-sm leading-7 text-white/65">{item.blurb}</p>
+                  <div className="pt-1">
+                    <motion.span
+                      initial={{ opacity: 0, letterSpacing: "0.1em" }}
+                      whileInView={{ opacity: 1, letterSpacing: "0.2em" }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.7, delay: 0.2 }}
+                      className="text-[10px] font-semibold uppercase text-white/40"
+                    >
+                      Starting from
+                    </motion.span>
+                    <motion.div
+                      initial={{ opacity: 0, y: 12, scale: 0.92 }}
+                      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ type: "spring", damping: 18, stiffness: 200, delay: 0.3 }}
+                      className="text-2xl font-semibold text-[#efc2aa]"
+                    >
+                      {item.id === 1 ? settings.residence1Price : item.id === 2 ? settings.residence2Price : settings.residence3Price}
+                    </motion.div>
                   </div>
                 </div>
                 <div className="grid grid-cols-3 gap-3 text-sm text-white/75">
@@ -445,6 +944,46 @@ function ResidencesSection({ onImageClick }: { onImageClick: (img: string) => vo
           </motion.div>
         ))}
       </div>
+
+      {/* Availability CTA */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="relative overflow-hidden rounded-[1.8rem] border border-[#c88e71]/25 bg-gradient-to-r from-[#c88e71]/15 via-[#121216] to-[#121216] p-7 md:p-9"
+      >
+        <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+          <div className="space-y-1.5">
+            <h3 className="text-xl md:text-2xl font-semibold text-white">
+              <AnimatedWords text="Call and inquire about your favourite unit's availability today!" />
+            </h3>
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="text-sm text-white/60"
+            >
+              Units are allocated on a first-come, first-served basis — speak to our sales team now.
+            </motion.p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <a href={`tel:${settings.contactPhone.replace(/\s/g, "")}`}>
+              <Button className="rounded-full bg-[#c88e71] px-6 py-5 text-black hover:bg-[#ddb09a]">
+                <Phone className="mr-2 h-4 w-4" /> {settings.contactPhone}
+              </Button>
+            </a>
+            <Button
+              variant="outline"
+              className="rounded-full border-white/15 bg-white/5 px-6 py-5 text-white hover:bg-white/10"
+              onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+            >
+              <Calendar className="mr-2 h-4 w-4" /> Book a Private Viewing
+            </Button>
+          </div>
+        </div>
+      </motion.div>
     </section>
   );
 }
@@ -454,8 +993,8 @@ function AmenitiesSection() {
     <section className="space-y-8" id="amenities">
       <SectionTitle
         eyebrow="Amenities"
-        title="Premium amenities for an elevated lifestyle"
-        text="The building experience is crafted to sell the full lifestyle, not just the square meters."
+        title="Every comfort, considered"
+        text="From three high-speed elevators to landscaped gardens and full backup utilities, the Lavelle experience is crafted around effortless daily living."
       />
       <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {amenities.map((item, i) => {
@@ -466,7 +1005,7 @@ function AmenitiesSection() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.08 }}
+              transition={{ duration: 0.4, delay: (i % 3) * 0.08 }}
             >
               <Card className="rounded-[1.5rem] border-white/10 bg-white/5 text-white h-full transition-all duration-300 hover:border-[#c88e71]/30 hover:bg-white/10 hover:-translate-y-1">
                 <CardContent className="p-6">
@@ -485,9 +1024,257 @@ function AmenitiesSection() {
   );
 }
 
+function LocationSection() {
+  const settings = React.useContext(SettingsContext);
+  return (
+    <section className="space-y-8" id="location">
+      <SectionTitle
+        eyebrow="Location & Connectivity"
+        title="Everything you need, minutes away"
+        text="Lavelle sits in Bugolobi — one of Kampala's most connected addresses. Daily life, business, schooling, and travel are all a short drive from your door."
+      />
+      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {locationSpots.map((spot, i) => {
+          const Icon = spot.icon;
+          return (
+            <motion.div
+              key={spot.name}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: (i % 3) * 0.1 }}
+            >
+              <Card className="rounded-[1.5rem] border-white/10 bg-white/5 text-white h-full transition-all duration-300 hover:border-[#c88e71]/30 hover:bg-white/10 hover:-translate-y-1 group">
+                <CardContent className="p-6">
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#c88e71]/15 text-[#efc2aa]">
+                      <Icon className="h-6 w-6" />
+                    </div>
+                    <div className="flex items-center gap-1.5 rounded-full border border-white/10 bg-black/30 px-3.5 py-1.5">
+                      <Car className="h-3.5 w-3.5 text-[#efc2aa]" />
+                      <span className="font-cinzel text-sm font-semibold text-white tracking-wide">{spot.time}</span>
+                    </div>
+                  </div>
+                  <h3 className="mt-5 text-lg font-semibold">{spot.name}</h3>
+                  <p className="mt-1.5 text-sm text-white/60">{spot.detail}</p>
+                  {/* Animated drive-time bar */}
+                  <div className="mt-4 h-[3px] w-full overflow-hidden rounded-full bg-white/10">
+                    <motion.div
+                      initial={{ scaleX: 0 }}
+                      whileInView={{ scaleX: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1.1, delay: 0.3 + (i % 3) * 0.1, ease: "easeOut" }}
+                      style={{ transformOrigin: "left", width: `${Math.min(parseInt(spot.time) * 2, 100)}%` }}
+                      className="h-full bg-gradient-to-r from-[#c88e71] to-[#efc2aa]"
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          );
+        })}
+      </div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="flex flex-wrap items-center justify-between gap-4 rounded-[1.5rem] border border-white/10 bg-white/5 px-6 py-5"
+      >
+        <div className="flex items-center gap-3 text-sm text-white/70">
+          <MapPin className="h-5 w-5 text-[#efc2aa]" />
+          Bugolobi, Kampala — Uganda
+        </div>
+        <Button
+          variant="outline"
+          className="rounded-full border-white/15 bg-white/5 text-white hover:bg-white/10"
+          onClick={() =>
+            window.open(
+              `https://wa.me/${settings.waNumber}?text=Hello%20Lavelle%2C%20please%20share%20the%20exact%20location%20pin.`,
+              "_blank"
+            )
+          }
+        >
+          <MessageCircle className="mr-2 h-4 w-4" /> Request Location Pin
+        </Button>
+      </motion.div>
+    </section>
+  );
+}
+
+function PaymentPlansSection() {
+  const settings = React.useContext(SettingsContext);
+  return (
+    <section className="space-y-8" id="payments">
+      <SectionTitle
+        eyebrow="Payment Plans"
+        title="Flexible plans, built around you"
+        text="Own at Lavelle on a schedule that suits you. Every plan is tailored individually — from booking to handover."
+      />
+      <div className="grid gap-5 md:grid-cols-3">
+        {paymentPlans.map((plan, i) => {
+          const Icon = plan.icon;
+          return (
+            <motion.div
+              key={plan.title}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.12 }}
+            >
+              <Card className="relative rounded-[1.6rem] border-white/10 bg-white/5 text-white h-full overflow-hidden transition-all duration-300 hover:border-[#c88e71]/30 hover:bg-white/10 hover:-translate-y-1">
+                <CardContent className="p-7">
+                  <div className="mb-4 flex items-center justify-between">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#c88e71]/15 text-[#efc2aa]">
+                      <Icon className="h-6 w-6" />
+                    </div>
+                    <span className="font-cinzel text-3xl text-white/10">{String(i + 1).padStart(2, "0")}</span>
+                  </div>
+                  <h3 className="text-xl font-semibold">{plan.title}</h3>
+                  <p className="mt-2 text-sm leading-7 text-white/65">{plan.text}</p>
+                </CardContent>
+              </Card>
+            </motion.div>
+          );
+        })}
+      </div>
+
+      {/* Discuss plan + downloads */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="grid gap-5 lg:grid-cols-[1.2fr_0.8fr]"
+      >
+        <div className="relative overflow-hidden rounded-[1.8rem] border border-[#c88e71]/25 bg-gradient-to-r from-[#c88e71]/15 via-[#121216] to-[#121216] p-7 md:p-9 flex flex-col justify-center">
+          <h3 className="text-xl md:text-2xl font-semibold text-white">
+            <AnimatedWords text="Message us to discuss your plan today!" />
+          </h3>
+          <p className="mt-1.5 text-sm text-white/60">
+            Share your budget and timeline — our team will structure a flexible payment plan around you.
+          </p>
+          <div className="mt-5 flex flex-wrap gap-3">
+            <Button
+              className="rounded-full bg-[#25D366] px-6 py-5 font-semibold text-black hover:bg-[#3ee07c]"
+              onClick={() =>
+                window.open(
+                  `https://wa.me/${settings.waNumber}?text=Hello%20Lavelle%2C%20I%27d%20like%20to%20discuss%20a%20flexible%20payment%20plan.`,
+                  "_blank"
+                )
+              }
+            >
+              <MessageCircle className="mr-2 h-4 w-4" /> Discuss My Plan
+            </Button>
+            <a href={`tel:${settings.contactPhone.replace(/\s/g, "")}`}>
+              <Button
+                variant="outline"
+                className="rounded-full border-white/15 bg-white/5 px-6 py-5 text-white hover:bg-white/10"
+              >
+                <Phone className="mr-2 h-4 w-4" /> Call Sales
+              </Button>
+            </a>
+          </div>
+        </div>
+
+        {/* Downloads */}
+        <div className="rounded-[1.8rem] border border-white/10 bg-white/5 p-7 space-y-4" id="downloads">
+          <div className="space-y-1">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#c88e71]">Downloads</p>
+            <h3 className="text-lg font-semibold text-white">Take Lavelle with you</h3>
+          </div>
+          <a
+            href="/downloads/Lavelle-Brochure.pdf"
+            download="Lavelle-Brochure.pdf"
+            className="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-black/30 p-4 transition hover:border-[#c88e71]/30 hover:bg-black/50 group"
+          >
+            <div className="flex items-center gap-3.5">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#c88e71]/15 text-[#efc2aa]">
+                <FileText className="h-5 w-5" />
+              </div>
+              <div>
+                <div className="text-sm font-medium text-white">Project Brochure</div>
+                <div className="text-xs text-white/50">PDF · Full project overview</div>
+              </div>
+            </div>
+            <Download className="h-4 w-4 text-white/40 transition group-hover:text-[#efc2aa] group-hover:translate-y-0.5" />
+          </a>
+          <a
+            href="/downloads/Lavelle-Booklet.pdf"
+            download="Lavelle-Booklet.pdf"
+            className="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-black/30 p-4 transition hover:border-[#c88e71]/30 hover:bg-black/50 group"
+          >
+            <div className="flex items-center gap-3.5">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#c88e71]/15 text-[#efc2aa]">
+                <BookOpen className="h-5 w-5" />
+              </div>
+              <div>
+                <div className="text-sm font-medium text-white">Residence Booklet</div>
+                <div className="text-xs text-white/50">PDF · Floor plans & finishes</div>
+              </div>
+            </div>
+            <Download className="h-4 w-4 text-white/40 transition group-hover:text-[#efc2aa] group-hover:translate-y-0.5" />
+          </a>
+        </div>
+      </motion.div>
+    </section>
+  );
+}
+
+// One crossfading frame of the cinematic gallery. The scroll-driven transforms
+// live here so exterior and interior sets can have different lengths without
+// breaking the hook order in the parent.
+function GalleryFrame({
+  item,
+  index,
+  total,
+  progress,
+  onClick,
+}: {
+  item: { image: string; title: string };
+  index: number;
+  total: number;
+  progress: any;
+  onClick: () => void;
+}) {
+  const start = (index - 0.35) / total;
+  const peakStart = index / total;
+  const peakEnd = (index + 0.7) / total;
+  const end = (index + 1.05) / total;
+
+  // First image starts opaque, last image stays opaque at the end
+  const opacityRange = [
+    index === 0 ? 0 : start,
+    index === 0 ? 0 : peakStart,
+    index === total - 1 ? 1 : peakEnd,
+    index === total - 1 ? 1 : end
+  ];
+
+  const opacity = useTransform(progress, opacityRange, [0, 1, 1, 0]);
+  const scale = useTransform(progress, [start, end], [1.0, 1.08], { clamp: true });
+
+  return (
+    <motion.div
+      style={{ opacity, scale }}
+      className="absolute inset-0 w-full h-full cursor-pointer"
+      onClick={onClick}
+    >
+      <img
+        src={item.image}
+        alt={item.title}
+        className="w-full h-full object-cover"
+      />
+      {/* Subtle vignetting shadow inside the viewport */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/30 pointer-events-none" />
+    </motion.div>
+  );
+}
+
 function GallerySection({ onImageClick }: { onImageClick: (img: string) => void }) {
   const containerRef = useRef<HTMLDivElement>(null);
-  
+  const [mode, setMode] = useState<"exterior" | "interior">("exterior");
+  const galleryItems = mode === "exterior" ? exteriorGallery : interiorGallery;
+
   // Track scroll inside the gallery section
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -507,99 +1294,78 @@ function GallerySection({ onImageClick }: { onImageClick: (img: string) => void 
     }
   });
 
-  // Calculate transforms for each gallery image
-  const images = galleryItems.map((item, i) => {
-    const len = galleryItems.length;
-    const start = (i - 0.35) / len;
-    const peakStart = i / len;
-    const peakEnd = (i + 0.7) / len;
-    const end = (i + 1.05) / len;
-
-    // First image starts opaque, last image stays opaque at the end
-    const opacityRange = [
-      i === 0 ? 0 : start,
-      i === 0 ? 0 : peakStart,
-      i === len - 1 ? 1 : peakEnd,
-      i === len - 1 ? 1 : end
-    ];
-
-    const opacity = useTransform(
-      scrollYProgress,
-      opacityRange,
-      [0, 1, 1, 0]
-    );
-
-    const scale = useTransform(
-      scrollYProgress,
-      [start, end],
-      [1.0, 1.08],
-      { clamp: true }
-    );
-
-    return { ...item, opacity, scale };
-  });
+  const safeIndex = Math.min(activeIndex, galleryItems.length - 1);
 
   return (
     <div
       ref={containerRef}
       id="gallery"
-      className="relative h-[400vh] bg-[#060607] pt-12 pb-24 overflow-visible"
+      style={{ height: `${galleryItems.length * 50}vh` }}
+      className="relative bg-[#060607] pt-12 pb-24 overflow-visible"
     >
       <div className="sticky top-0 h-screen w-full flex flex-col justify-between overflow-hidden py-8">
-        
+
         {/* Sticky Header Section */}
-        <div className="w-full max-w-7xl mx-auto px-4 md:px-8 z-20">
+        <div className="w-full max-w-7xl mx-auto px-4 md:px-8 z-20 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
           <SectionTitle
             eyebrow="Cinematic Gallery"
             title="A walkthrough of life at Lavelle"
-            text="Scroll down to immerse yourself in the spaces, architectural facades, and premium amenities."
+            text="Scroll down to immerse yourself — and switch between the architecture outside and the signature interiors within."
           />
+          {/* Interior / Exterior toggle */}
+          <div className="flex gap-1.5 self-start rounded-full border border-white/10 bg-black/40 p-1.5">
+            {([["exterior", "Exterior", Building2], ["interior", "Interiors", Sparkles]] as const).map(([key, label, Icon]) => (
+              <button
+                key={key}
+                onClick={() => setMode(key)}
+                className={`flex items-center gap-2 rounded-full px-5 py-2.5 text-xs font-semibold tracking-wide transition-all duration-300 ${
+                  mode === key
+                    ? "bg-[#c88e71] text-black shadow-lg shadow-[#c88e71]/15"
+                    : "text-white/55 hover:text-white hover:bg-white/5"
+                }`}
+              >
+                <Icon className="h-3.5 w-3.5" />
+                {label}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Viewport Frame */}
         <div className="w-full h-[55vh] md:h-[65vh] max-w-7xl mx-auto px-4 md:px-8 relative mt-6 mb-6">
           <div className="relative w-full h-full overflow-hidden rounded-[2rem] border border-white/10 bg-black/60 shadow-2xl">
-            
+
             {/* Absolute Images with Crossfade and Zoom */}
-            {images.map((item, i) => (
-              <motion.div
-                key={item.image}
-                style={{ opacity: item.opacity, scale: item.scale }}
-                className="absolute inset-0 w-full h-full cursor-pointer"
+            {galleryItems.map((item, i) => (
+              <GalleryFrame
+                key={`${mode}-${item.image}`}
+                item={item}
+                index={i}
+                total={galleryItems.length}
+                progress={scrollYProgress}
                 onClick={() => onImageClick(item.image)}
-              >
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="w-full h-full object-cover"
-                />
-                {/* Subtle vignetting shadow inside the viewport */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/30 pointer-events-none" />
-              </motion.div>
+              />
             ))}
 
             {/* Floating Info Card (Bottom-Left) */}
             <div className="absolute bottom-6 left-6 right-6 md:right-auto md:bottom-8 z-30 max-w-md bg-black/75 border border-white/10 rounded-[1.5rem] p-5 backdrop-blur-md shadow-2xl pointer-events-auto">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeIndex}
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -15 }}
-                  transition={{ duration: 0.35, ease: "easeOut" }}
-                  className="space-y-1.5 text-left"
-                >
-                  <span className="text-[9px] font-semibold uppercase tracking-[0.2em] text-[#efc2aa]">
-                    Residences Gallery — {activeIndex + 1} of {galleryItems.length}
-                  </span>
-                  <h3 className="text-lg font-bold text-white font-cinzel tracking-wider">
-                    {galleryItems[activeIndex].title}
-                  </h3>
-                  <p className="text-xs text-white/65 leading-relaxed font-light">
-                    {galleryItems[activeIndex].description}
-                  </p>
-                </motion.div>
-              </AnimatePresence>
+              <motion.div
+                key={`${mode}-${safeIndex}`}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.35, ease: "easeOut" }}
+                className="space-y-1.5 text-left"
+              >
+                <span className="text-[9px] font-semibold uppercase tracking-[0.2em] text-[#efc2aa]">
+                  {mode === "exterior" ? "Exterior" : "Interior"} Gallery — {safeIndex + 1} of {galleryItems.length}
+                </span>
+                <h3 className="text-lg font-bold text-white font-cinzel tracking-wider">
+                  {galleryItems[safeIndex].title}
+                </h3>
+                <p className="text-xs text-white/65 leading-relaxed font-light">
+                  {galleryItems[safeIndex].description}
+                </p>
+              </motion.div>
             </div>
 
             {/* Floating Zoom Button (Bottom-Right) */}
@@ -607,7 +1373,7 @@ function GallerySection({ onImageClick }: { onImageClick: (img: string) => void 
               <button
                 onClick={(e) => {
                   e.stopPropagation();
-                  onImageClick(galleryItems[activeIndex].image);
+                  onImageClick(galleryItems[safeIndex].image);
                 }}
                 className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-black/60 text-[#efc2aa] backdrop-blur-md transition hover:scale-105 hover:bg-black/80 hover:text-white"
                 title="Expand View"
@@ -619,7 +1385,7 @@ function GallerySection({ onImageClick }: { onImageClick: (img: string) => void 
             {/* Floating Index Indicator (Top-Right) */}
             <div className="absolute top-6 right-6 z-30 bg-black/65 border border-white/10 px-4 py-2 rounded-full backdrop-blur-md flex items-center gap-3">
               <span className="font-cinzel text-xs font-semibold text-white tracking-wider">
-                {String(activeIndex + 1).padStart(2, "0")}
+                {String(safeIndex + 1).padStart(2, "0")}
               </span>
               <div className="h-3 w-[1px] bg-white/20" />
               <span className="font-cinzel text-xs font-semibold text-white/40 tracking-wider">
@@ -647,49 +1413,6 @@ function GallerySection({ onImageClick }: { onImageClick: (img: string) => void 
 
       </div>
     </div>
-  );
-}
-
-function AboutSection() {
-  return (
-    <section className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]" id="about">
-      <Card className="rounded-[1.8rem] border-white/10 bg-[#121216] text-white">
-        <CardContent className="p-8">
-          <SectionTitle
-            eyebrow="About Lavelle"
-            title="A premium address in the heart of Kampala"
-            text="Lavelle is a desirable residential address: sophisticated, architecturally considered, and built for buyers who care about design, comfort, and enduring value."
-          />
-        </CardContent>
-      </Card>
-      <Card className="rounded-[1.8rem] border-white/10 bg-white/5 text-white">
-        <CardContent className="grid gap-6 p-8 md:grid-cols-2">
-          {[
-            [
-              "Prime location",
-              "Situated in one of Kampala's most sought-after urban districts, minutes from business and leisure hubs.",
-            ],
-            [
-              "WhatsApp-first sales",
-              "Every page routes interested buyers directly into a guided sales conversation with your team.",
-            ],
-            [
-              "Trust-driven design",
-              "Clean typography, spacious layout, and motion cues that communicate credibility and premium quality.",
-            ],
-            [
-              "Qualified buyers only",
-              "Inquiry forms capture budget, unit interest, and purchase timeline — so your team speaks to serious clients.",
-            ],
-          ].map(([title, body]) => (
-            <div key={title} className="rounded-[1.2rem] bg-black/30 p-5">
-              <h3 className="text-lg font-semibold">{title}</h3>
-              <p className="mt-2 text-sm leading-7 text-white/65">{body}</p>
-            </div>
-          ))}
-        </CardContent>
-      </Card>
-    </section>
   );
 }
 
@@ -747,7 +1470,64 @@ function ContactSection() {
   };
 
   return (
-    <section className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]" id="contact">
+    <section className="space-y-8" id="contact">
+      {/* Book a viewing banner */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="relative overflow-hidden rounded-[2rem] border border-white/10"
+      >
+        <img
+          src="/exterior/lavelle-aerial-entrance.jpg"
+          alt="Lavelle entrance court"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/40" />
+        <div className="relative flex flex-col gap-5 p-8 md:flex-row md:items-center md:justify-between md:p-12">
+          <div className="space-y-2 max-w-xl">
+            <motion.p
+              initial={{ opacity: 0, x: -14 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#efc2aa]"
+            >
+              Experience It In Person
+            </motion.p>
+            <h3 className="text-2xl md:text-3xl font-semibold text-white">
+              <AnimatedWords text="Book a private viewing today!" />
+            </h3>
+            <p className="text-sm text-white/65">
+              Walk the site, feel the ceiling heights, and watch the sunset from a panoramic terrace. Private tours by appointment.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <Button
+              className="rounded-full bg-[#c88e71] px-6 py-5 font-semibold text-black hover:bg-[#ddb09a]"
+              onClick={() =>
+                window.open(
+                  `https://wa.me/${settings.waNumber}?text=Hello%20Lavelle%2C%20I%27d%20like%20to%20book%20a%20private%20viewing.`,
+                  "_blank"
+                )
+              }
+            >
+              <Calendar className="mr-2 h-4 w-4" /> Book a Viewing
+            </Button>
+            <a href={`tel:${settings.contactPhone.replace(/\s/g, "")}`}>
+              <Button
+                variant="outline"
+                className="rounded-full border-white/20 bg-black/30 px-6 py-5 text-white backdrop-blur-md hover:bg-black/50"
+              >
+                <Phone className="mr-2 h-4 w-4" /> Call Now
+              </Button>
+            </a>
+          </div>
+        </div>
+      </motion.div>
+
+      <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
       <Card className="rounded-[1.8rem] border-white/10 bg-white/5 text-white">
         <CardHeader>
           <CardTitle className="text-3xl">Client Inquiry Form</CardTitle>
@@ -786,7 +1566,7 @@ function ContactSection() {
               value={form.unit}
               onChange={handleChange}
               className="h-12 rounded-xl border-white/10 bg-black/30 text-white placeholder:text-white/40"
-              placeholder="Preferred unit"
+              placeholder="Preferred unit (2 BHK / 3 BHK / Penthouse)"
             />
           </div>
 
@@ -906,28 +1686,47 @@ function ContactSection() {
           <SectionTitle
             eyebrow="Contact"
             title="Direct response channels for high-intent buyers"
-            text="The contact stack is designed to reduce friction and move prospects quickly from interest to conversation."
+            text="Call, email, or WhatsApp — whichever you prefer, our sales team responds fast."
           />
           <div className="space-y-4">
             {[
-              [Phone, settings.contactPhone, "Sales line"],
-              [MessageCircle, "WhatsApp direct chat", "Instant response"],
-              [MapPin, "Kampala, Uganda", "Project location"],
-              [Calendar, "Private site visits", "By appointment"],
-            ].map(([Icon, title, sub]: any) => (
-              <div key={title} className="flex items-center gap-4 rounded-2xl bg-white/5 p-4">
-                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#c88e71]/15 text-[#efc2aa]">
-                  <Icon className="h-5 w-5" />
+              [Phone, settings.contactPhone, "Sales line — call & inquire today", `tel:${settings.contactPhone.replace(/\s/g, "")}`],
+              [Mail, settings.contactEmail, "Email our sales team", `mailto:${settings.contactEmail}`],
+              [MessageCircle, "WhatsApp direct chat", "Instant response", `https://wa.me/${settings.waNumber}?text=Hello%20Lavelle%2C%20I%27m%20interested%20in%20the%20project.`],
+              [MapPin, "Bugolobi, Kampala — Uganda", "Project location", null],
+              [Calendar, "Private viewings", "By appointment — book today", null],
+            ].map(([Icon, title, sub, href]: any) => {
+              const inner = (
+                <>
+                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#c88e71]/15 text-[#efc2aa]">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <div className="font-medium">{title}</div>
+                    <div className="text-sm text-white/60">{sub}</div>
+                  </div>
+                </>
+              );
+              return href ? (
+                <a
+                  key={title}
+                  href={href}
+                  target={href.startsWith("http") ? "_blank" : undefined}
+                  rel="noreferrer"
+                  className="flex items-center gap-4 rounded-2xl bg-white/5 p-4 transition hover:bg-white/10"
+                >
+                  {inner}
+                </a>
+              ) : (
+                <div key={title} className="flex items-center gap-4 rounded-2xl bg-white/5 p-4">
+                  {inner}
                 </div>
-                <div>
-                  <div className="font-medium">{title}</div>
-                  <div className="text-sm text-white/60">{sub}</div>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </CardContent>
       </Card>
+      </div>
     </section>
   );
 }
@@ -949,14 +1748,14 @@ function LoadingScreen() {
       >
         <img src="/logo.svg" alt="Lavelle Logo" className="h-32 w-auto object-contain" />
       </motion.div>
-      <motion.div 
+      <motion.div
         className="mt-8 flex gap-2"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6 }}
       >
         {[0, 1, 2].map((i) => (
-          <motion.div 
+          <motion.div
             key={i}
             className="h-2 w-2 rounded-full bg-[#c88e71]"
             animate={{ scale: [1, 1.5, 1], opacity: [0.3, 1, 0.3] }}
@@ -980,8 +1779,8 @@ function Lightbox({ image, onClose }: { image: string | null; onClose: () => voi
           className="fixed inset-0 z-[200] flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm"
           onClick={onClose}
         >
-          <button 
-            className="absolute right-6 top-6 rounded-full bg-white/10 p-2 text-white/70 backdrop-blur-xl transition hover:bg-white/20 hover:text-white" 
+          <button
+            className="absolute right-6 top-6 rounded-full bg-white/10 p-2 text-white/70 backdrop-blur-xl transition hover:bg-white/20 hover:text-white"
             onClick={onClose}
           >
             <X className="h-6 w-6" />
@@ -1008,13 +1807,24 @@ export default function LavelleWebsite() {
   const [isLoading, setIsLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [siteSettings, setSiteSettings] = useState(DEFAULT_SETTINGS);
+  const [interestOpen, setInterestOpen] = useState(false);
 
   // Track every page visit in Firestore
   useEffect(() => {
     trackPageVisit();
     // Simulate loading
     const timer = setTimeout(() => setIsLoading(false), 2200);
-    
+
+    // Show the Register Your Interest popup right after the loading screen
+    // (once per browser session)
+    let interestTimer: ReturnType<typeof setTimeout> | undefined;
+    if (!sessionStorage.getItem("lavelle_interest_shown")) {
+      interestTimer = setTimeout(() => {
+        setInterestOpen(true);
+        sessionStorage.setItem("lavelle_interest_shown", "1");
+      }, 3400);
+    }
+
     // Load Settings
     const unsub = onSnapshot(doc(db, "siteSettings", "general"), (docSnap) => {
       if (docSnap.exists()) {
@@ -1024,6 +1834,7 @@ export default function LavelleWebsite() {
 
     return () => {
       clearTimeout(timer);
+      if (interestTimer) clearTimeout(interestTimer);
       unsub();
     };
   }, []);
@@ -1046,6 +1857,8 @@ export default function LavelleWebsite() {
     ["interiors", "Interiors"],
     ["amenities", "Amenities"],
     ["gallery", "Gallery"],
+    ["location", "Location"],
+    ["payments", "Payments"],
     ["contact", "Contact"],
   ];
 
@@ -1055,7 +1868,7 @@ export default function LavelleWebsite() {
         {isLoading ? (
           <LoadingScreen key="loading" />
         ) : (
-          <motion.div 
+          <motion.div
             key="content"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -1067,10 +1880,10 @@ export default function LavelleWebsite() {
         <header className="sticky top-4 z-50 mb-6 rounded-full border border-white/10 bg-black/50 px-4 py-3 backdrop-blur-xl md:px-6">
           <div className="flex items-center justify-between gap-4">
             <button onClick={() => scrollToSection("home")} className="flex items-center">
-              <img 
-                src="/logo.svg" 
-                alt="Lavelle" 
-                className="h-16 w-auto object-contain" 
+              <img
+                src="/logo.svg"
+                alt="Lavelle"
+                className="h-16 w-auto object-contain"
               />
             </button>
 
@@ -1082,7 +1895,7 @@ export default function LavelleWebsite() {
               ))}
             </nav>
 
-            <div className="hidden items-center gap-3 lg:flex">
+            <div className="hidden items-center gap-3 xl:flex">
               <Button
                 variant="outline"
                 className="rounded-full border-white/15 bg-white/5 text-white hover:bg-white/10"
@@ -1097,9 +1910,9 @@ export default function LavelleWebsite() {
               </Button>
               <Button
                 className="rounded-full bg-[#c88e71] text-black hover:bg-[#ddb09a]"
-                onClick={() => scrollToSection("contact")}
+                onClick={() => setInterestOpen(true)}
               >
-                Request Callback
+                Register Interest
               </Button>
             </div>
 
@@ -1119,6 +1932,12 @@ export default function LavelleWebsite() {
                   {label}
                 </button>
               ))}
+              <button
+                onClick={() => { setMobileOpen(false); setInterestOpen(true); }}
+                className="rounded-2xl bg-[#c88e71] px-4 py-3 text-left font-semibold text-black"
+              >
+                Register Your Interest
+              </button>
             </div>
           )}
         </header>
@@ -1129,15 +1948,19 @@ export default function LavelleWebsite() {
             <Hero onNavigate={scrollToSection} onImageClick={setSelectedImage} />
           </div>
           <AboutSection />
+          <WhyLavelleSection onImageClick={setSelectedImage} />
           <ResidencesSection onImageClick={setSelectedImage} />
           <InteriorShowcase />
           <AmenitiesSection />
           <GallerySection onImageClick={setSelectedImage} />
+          <LocationSection />
+          <PaymentPlansSection />
           <ContactSection />
         </main>
       </div>
 
       <Lightbox image={selectedImage} onClose={() => setSelectedImage(null)} />
+      <RegisterInterestModal open={interestOpen} onClose={() => setInterestOpen(false)} />
 
       {/* Floating WhatsApp button */}
       <a
@@ -1154,20 +1977,36 @@ export default function LavelleWebsite() {
         <div className="mx-auto grid max-w-7xl gap-8 px-4 py-12 md:grid-cols-3 md:px-6 lg:px-8">
           <div>
             <div className="mb-6">
-              <img 
-                src="/logo.svg" 
-                alt="Lavelle" 
-                className="h-32 w-auto object-contain" 
+              <img
+                src="/logo.svg"
+                alt="Lavelle"
+                className="h-32 w-auto object-contain"
               />
             </div>
             <p className="max-w-sm text-sm leading-7 text-white/60">
-              Premium luxury residences in Kampala, Uganda. Sophisticated design, world-class amenities, and a sales experience built to move fast.
+              35 bespoke luxury residences in Bugolobi, Kampala. Signature earthy interiors, 3.2M ceilings, panoramic terraces, and world-class amenities.
             </p>
+            <div className="mt-5 flex gap-3">
+              <a
+                href="/downloads/Lavelle-Brochure.pdf"
+                download="Lavelle-Brochure.pdf"
+                className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs text-white/70 transition hover:bg-white/10 hover:text-white"
+              >
+                <Download className="h-3.5 w-3.5" /> Brochure
+              </a>
+              <a
+                href="/downloads/Lavelle-Booklet.pdf"
+                download="Lavelle-Booklet.pdf"
+                className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs text-white/70 transition hover:bg-white/10 hover:text-white"
+              >
+                <BookOpen className="h-3.5 w-3.5" /> Booklet
+              </a>
+            </div>
           </div>
           <div>
             <div className="mb-3 font-semibold">Pages</div>
             <div className="grid gap-2 text-sm text-white/60">
-              {[["about", "About"], ["residences", "Residences"], ["interiors", "Interiors"], ["amenities", "Amenities"], ["gallery", "Gallery"], ["contact", "Contact"]].map(
+              {[["about", "About"], ["why", "Why Lavelle"], ["residences", "Residences"], ["interiors", "Interiors"], ["amenities", "Amenities"], ["gallery", "Gallery"], ["location", "Location"], ["payments", "Payment Plans"], ["contact", "Contact"]].map(
                 ([id, label]) => (
                   <button key={id} className="text-left hover:text-white" onClick={() => scrollToSection(id)}>
                     {label}
@@ -1179,9 +2018,10 @@ export default function LavelleWebsite() {
           <div>
             <div className="mb-3 font-semibold">Contact</div>
             <div className="grid gap-2 text-sm text-white/60">
-              <div>{siteSettings.contactPhone}</div>
-              <div>Kampala, Uganda</div>
-              <div>Private viewings available</div>
+              <a href={`tel:${siteSettings.contactPhone.replace(/\s/g, "")}`} className="hover:text-white">{siteSettings.contactPhone}</a>
+              <a href={`mailto:${siteSettings.contactEmail}`} className="hover:text-white">{siteSettings.contactEmail}</a>
+              <div>Bugolobi, Kampala — Uganda</div>
+              <div>Private viewings by appointment</div>
               <button
                 className="text-left text-[#efc2aa] hover:text-[#ddb09a]"
                 onClick={() =>
