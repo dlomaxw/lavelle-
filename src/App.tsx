@@ -61,7 +61,8 @@ export const DEFAULT_SETTINGS = {
   heroVideoUrl: "https://www.youtube.com/embed/bQaBlh1N7IA?autoplay=1&mute=1&controls=0&loop=1&playlist=bQaBlh1N7IA&rel=0&playsinline=1&vq=hd1080",
   waNumber: "256791224477",
   contactPhone: "+256 791 224 477",
-  contactEmail: "sales@lavelleresidences.com",
+  contactEmail: "lavellebugolobi@outlook.com",
+  contactEmail2: "despotic62@gmail.com",
   residence1Price: "$168,000",
   residence2Price: "$245,000",
   residence3Price: "$390,000"
@@ -502,7 +503,7 @@ function RegisterInterestModal({ open, onClose }: { open: boolean; onClose: () =
                       <span className="text-[9px] text-white/60">Call Us</span>
                     </a>
                     <a
-                      href={`mailto:${settings.contactEmail}`}
+                      href={`mailto:${settings.contactEmail}?cc=${settings.contactEmail2}&subject=Lavelle%20Inquiry`}
                       className="flex flex-col items-center gap-1.5 rounded-2xl bg-white/5 p-3 text-center transition hover:bg-white/10"
                     >
                       <Mail className="h-4 w-4 text-[#efc2aa]" />
@@ -1691,7 +1692,7 @@ function ContactSection() {
           <div className="space-y-4">
             {[
               [Phone, settings.contactPhone, "Sales line — call & inquire today", `tel:${settings.contactPhone.replace(/\s/g, "")}`],
-              [Mail, settings.contactEmail, "Email our sales team", `mailto:${settings.contactEmail}`],
+              [Mail, settings.contactEmail, "Email our sales team", `mailto:${settings.contactEmail}?cc=${settings.contactEmail2}&subject=Lavelle%20Inquiry`],
               [MessageCircle, "WhatsApp direct chat", "Instant response", `https://wa.me/${settings.waNumber}?text=Hello%20Lavelle%2C%20I%27m%20interested%20in%20the%20project.`],
               [MapPin, "Bugolobi, Kampala — Uganda", "Project location", null],
               [Calendar, "Private viewings", "By appointment — book today", null],
@@ -2019,7 +2020,7 @@ export default function LavelleWebsite() {
             <div className="mb-3 font-semibold">Contact</div>
             <div className="grid gap-2 text-sm text-white/60">
               <a href={`tel:${siteSettings.contactPhone.replace(/\s/g, "")}`} className="hover:text-white">{siteSettings.contactPhone}</a>
-              <a href={`mailto:${siteSettings.contactEmail}`} className="hover:text-white">{siteSettings.contactEmail}</a>
+              <a href={`mailto:${siteSettings.contactEmail}?cc=${siteSettings.contactEmail2}&subject=Lavelle%20Inquiry`} className="hover:text-white">{siteSettings.contactEmail}</a>
               <div>Bugolobi, Kampala — Uganda</div>
               <div>Private viewings by appointment</div>
               <button
