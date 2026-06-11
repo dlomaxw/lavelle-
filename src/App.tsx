@@ -97,6 +97,7 @@ const residences = [
     size: "118 sqm",
     status: "15 Units",
     image: "/exterior/lavelle-balcony-detail.jpg",
+    alt: "2 bedroom apartment for sale in Bugolobi Kampala — panoramic terraces at Lavelle, 118 sqm from $168,000",
     blurb:
       "Open-plan two-bedroom homes with warm earthy finishes, panoramic glazing, and private terrace living.",
   },
@@ -109,6 +110,7 @@ const residences = [
     size: "176 sqm",
     status: "16 Units",
     image: "/exterior/lavelle-building-day.jpg",
+    alt: "3 bedroom apartment for sale in Bugolobi Kampala — Lavelle luxury residence tower, 176 sqm from $245,000",
     blurb:
       "Generous three-bedroom family residences designed for long-term comfort, privacy, and elevated everyday living.",
   },
@@ -121,6 +123,7 @@ const residences = [
     size: "248 sqm",
     status: "4 Units",
     image: "/exterior/lavelle-rooftop-aerial.jpg",
+    alt: "Penthouse for sale in Kampala — rooftop terraces of Lavelle Bugolobi, 248 sqm from $390,000",
     blurb:
       "Four exclusive top-floor penthouses with statement interiors, entertaining zones, and sweeping skyline-facing terraces.",
   },
@@ -424,7 +427,7 @@ function RegisterInterestModal({ open, onClose }: { open: boolean; onClose: () =
             <div className="relative h-36 w-full overflow-hidden">
               <img
                 src="/exterior/lavelle-entrance-dusk.jpg"
-                alt="Lavelle entrance"
+                alt="Gated entrance of Lavelle Bugolobi luxury apartments in Kampala at dusk"
                 className="h-full w-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#121216] via-black/30 to-transparent" />
@@ -612,7 +615,7 @@ function Hero({ onNavigate, onImageClick }: { onNavigate: (id: string) => void; 
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.7 }}
               className="font-cormorant text-lg md:text-xl italic text-[#efc2aa] tracking-wide text-center md:text-left font-medium"
             >
-              35 bespoke residences engineered for elevated living.
+              35 bespoke 2 &amp; 3 bedroom apartments and penthouses in Bugolobi, Kampala.
             </motion.div>
 
             <motion.p
@@ -774,7 +777,7 @@ function WhyLavelleSection({ onImageClick }: { onImageClick: (img: string) => vo
           <div className="relative overflow-hidden rounded-[2rem] border border-white/10 shadow-2xl shadow-black/60">
             <motion.img
               src="/exterior/lavelle-front-elevation.jpg"
-              alt="Lavelle front elevation"
+              alt="Lavelle Bugolobi front elevation — boutique building of 35 luxury apartments and penthouses for sale in Kampala"
               className="h-[420px] md:h-[520px] w-full object-cover transition-transform duration-[1200ms] group-hover:scale-110"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
@@ -877,7 +880,7 @@ function ResidencesSection({ onImageClick }: { onImageClick: (img: string) => vo
               >
                 <img
                   src={item.image}
-                  alt={item.name}
+                  alt={item.alt}
                   className="h-72 w-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-500 flex items-center justify-center">
@@ -1270,7 +1273,7 @@ function GalleryFrame({
     >
       <img
         src={item.image}
-        alt={item.title}
+        alt={`${item.title} — Lavelle Bugolobi luxury 2 & 3 bedroom apartments and penthouses, Kampala`}
         className="w-full h-full object-cover"
       />
       {/* Subtle vignetting shadow inside the viewport */}
@@ -1503,7 +1506,7 @@ function ContactSection() {
       >
         <img
           src="/exterior/lavelle-aerial-entrance.jpg"
-          alt="Lavelle entrance court"
+          alt="Aerial view of the Lavelle Bugolobi entrance court — book a private viewing of apartments in Kampala"
           className="absolute inset-0 h-full w-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/40" />
@@ -1768,7 +1771,7 @@ function LoadingScreen() {
         animate={{ scale: 1, opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: "easeOut" }}
       >
-        <img src="/logo.svg" alt="Lavelle Logo" className="h-32 w-auto object-contain" />
+        <img src="/logo.svg" alt="Lavelle Bugolobi — luxury apartments in Kampala" className="h-32 w-auto object-contain" />
       </motion.div>
       <motion.div
         className="mt-8 flex gap-2"
@@ -1836,18 +1839,18 @@ export default function LavelleWebsite() {
     trackPageVisit();
     // Simulate loading
     const timer = setTimeout(() => setIsLoading(false), 2200);
-
     // Show the Register Your Interest popup right after the loading screen
-    // (once per browser session)
+    // (once per browser session in production, on every reload in development)
     let interestTimer: ReturnType<typeof setTimeout> | undefined;
-    if (!sessionStorage.getItem("lavelle_interest_shown")) {
+    const isDev = import.meta.env.DEV;
+    if (isDev || !sessionStorage.getItem("lavelle_interest_shown")) {
       interestTimer = setTimeout(() => {
         setInterestOpen(true);
-        sessionStorage.setItem("lavelle_interest_shown", "1");
+        if (!isDev) {
+          sessionStorage.setItem("lavelle_interest_shown", "1");
+        }
       }, 3400);
-    }
-
-    // Load Settings
+    }    // Load Settings
     const unsub = onSnapshot(doc(db, "siteSettings", "general"), (docSnap) => {
       if (docSnap.exists()) {
         setSiteSettings(prev => ({ ...prev, ...docSnap.data() as typeof DEFAULT_SETTINGS }));
@@ -1904,7 +1907,7 @@ export default function LavelleWebsite() {
             <button onClick={() => scrollToSection("home")} className="flex items-center">
               <img
                 src="/logo.svg"
-                alt="Lavelle"
+                alt="Lavelle Bugolobi — 2 & 3 bedroom apartments and penthouses in Kampala"
                 className="h-16 w-auto object-contain"
               />
             </button>
@@ -2001,7 +2004,7 @@ export default function LavelleWebsite() {
             <div className="mb-6">
               <img
                 src="/logo.svg"
-                alt="Lavelle"
+                alt="Lavelle Bugolobi luxury residences logo — apartments for sale in Kampala, Uganda"
                 className="h-32 w-auto object-contain"
               />
             </div>

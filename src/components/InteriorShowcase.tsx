@@ -460,7 +460,7 @@ export default function InteriorShowcase() {
               <motion.img
                 key={activeView.image}
                 src={activeView.image}
-                alt={activeView.label}
+                alt={`${activeView.label} — ${activeSpace.title} interior of Lavelle Bugolobi luxury apartments, Kampala`}
                 initial={{ opacity: 0, scale: 1.02 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0 }}
