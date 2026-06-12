@@ -39,6 +39,7 @@ import {
   Baby,
   CreditCard,
   CalendarCheck,
+  Lock,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import InteriorShowcase from "@/components/InteriorShowcase";
@@ -1038,6 +1039,8 @@ function AmenitiesSection() {
 
 function LocationSection() {
   const settings = React.useContext(SettingsContext);
+  const [isMapInteractive, setIsMapInteractive] = useState(false);
+
   return (
     <section className="space-y-8" id="location">
       <SectionTitle
@@ -1045,47 +1048,198 @@ function LocationSection() {
         title="Everything you need, minutes away"
         text="Lavelle sits in Bugolobi — one of Kampala's most connected addresses. Daily life, business, schooling, and travel are all a short drive from your door."
       />
-      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-        {locationSpots.map((spot, i) => {
-          const Icon = spot.icon;
-          return (
-            <motion.div
-              key={spot.name}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: (i % 3) * 0.1 }}
-            >
-              <Card className="rounded-[1.5rem] border-white/10 bg-white/5 text-white h-full transition-all duration-300 hover:border-[#c88e71]/30 hover:bg-white/10 hover:-translate-y-1 group">
-                <CardContent className="p-6">
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#c88e71]/15 text-[#efc2aa]">
-                      <Icon className="h-6 w-6" />
+      <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] items-stretch">
+        {/* Left Column: Connectivity Cards */}
+        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+          {locationSpots.map((spot, i) => {
+            const Icon = spot.icon;
+            return (
+              <motion.div
+                key={spot.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: (i % 2) * 0.1 }}
+              >
+                <Card className="rounded-[1.5rem] border-white/10 bg-white/5 text-white h-full transition-all duration-300 hover:border-[#c88e71]/30 hover:bg-white/10 hover:-translate-y-0.5 group">
+                  <CardContent className="p-5">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#c88e71]/15 text-[#efc2aa]">
+                        <Icon className="h-5.5 w-5.5" />
+                      </div>
+                      <div className="flex items-center gap-1.5 rounded-full border border-white/10 bg-black/30 px-3 py-1">
+                        <Car className="h-3.5 w-3.5 text-[#efc2aa]" />
+                        <span className="font-cinzel text-xs font-semibold text-white tracking-wide">{spot.time}</span>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-1.5 rounded-full border border-white/10 bg-black/30 px-3.5 py-1.5">
-                      <Car className="h-3.5 w-3.5 text-[#efc2aa]" />
-                      <span className="font-cinzel text-sm font-semibold text-white tracking-wide">{spot.time}</span>
+                    <h3 className="mt-4 text-base font-semibold">{spot.name}</h3>
+                    <p className="mt-1 text-xs text-white/60">{spot.detail}</p>
+                    {/* Animated drive-time bar */}
+                    <div className="mt-4 h-[3px] w-full overflow-hidden rounded-full bg-white/10">
+                      <motion.div
+                        initial={{ scaleX: 0 }}
+                        whileInView={{ scaleX: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1.1, delay: 0.2 + (i % 2) * 0.1, ease: "easeOut" }}
+                        style={{ transformOrigin: "left", width: `${Math.min(parseInt(spot.time) * 2, 100)}%` }}
+                        className="h-full bg-gradient-to-r from-[#c88e71] to-[#efc2aa]"
+                      />
                     </div>
-                  </div>
-                  <h3 className="mt-5 text-lg font-semibold">{spot.name}</h3>
-                  <p className="mt-1.5 text-sm text-white/60">{spot.detail}</p>
-                  {/* Animated drive-time bar */}
-                  <div className="mt-4 h-[3px] w-full overflow-hidden rounded-full bg-white/10">
+                  </CardContent>
+                </Card>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* Right Column: Map Card Container */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="relative h-[480px] lg:h-auto min-h-[480px] rounded-[2rem] border border-white/10 bg-white/5 overflow-hidden shadow-2xl group flex flex-col"
+        >
+          <iframe
+            src="https://maps.google.com/maps?q=0.309984,32.623613&t=&z=16&ie=UTF8&iwloc=&output=embed"
+            className="absolute inset-0 w-full h-full border-0 transition-all duration-700"
+            style={{
+              filter: isMapInteractive 
+                ? "none" 
+                : "grayscale(1) invert(0.9) contrast(1.2) brightness(0.85) hue-rotate(10deg)",
+              pointerEvents: isMapInteractive ? "auto" : "none",
+            }}
+            allowFullScreen
+            loading="lazy"
+            title="Lavelle Location Map"
+          />
+
+          <AnimatePresence>
+            {!isMapInteractive && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.4 }}
+                className="absolute inset-0 flex flex-col justify-between p-6 pointer-events-none z-10"
+              >
+                <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/80 pointer-events-none" />
+
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <div className="relative flex items-center justify-center">
                     <motion.div
-                      initial={{ scaleX: 0 }}
-                      whileInView={{ scaleX: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 1.1, delay: 0.3 + (i % 3) * 0.1, ease: "easeOut" }}
-                      style={{ transformOrigin: "left", width: `${Math.min(parseInt(spot.time) * 2, 100)}%` }}
-                      className="h-full bg-gradient-to-r from-[#c88e71] to-[#efc2aa]"
+                      animate={{
+                        scale: [1, 2.4],
+                        opacity: [0.5, 0]
+                      }}
+                      transition={{
+                        duration: 2.2,
+                        repeat: Infinity,
+                        ease: "easeOut"
+                      }}
+                      className="absolute h-16 w-16 rounded-full border-2 border-[#efc2aa]/40 bg-[#efc2aa]/5"
                     />
+                    <motion.div
+                      animate={{
+                        scale: [1, 1.8],
+                        opacity: [0.7, 0]
+                      }}
+                      transition={{
+                        duration: 2.2,
+                        delay: 0.7,
+                        repeat: Infinity,
+                        ease: "easeOut"
+                      }}
+                      className="absolute h-16 w-16 rounded-full border-2 border-[#c88e71]/40 bg-[#c88e71]/5"
+                    />
+                    <motion.div
+                      animate={{
+                        scale: [1, 1.2],
+                        opacity: [0.9, 0]
+                      }}
+                      transition={{
+                        duration: 2.2,
+                        delay: 1.4,
+                        repeat: Infinity,
+                        ease: "easeOut"
+                      }}
+                      className="absolute h-16 w-16 rounded-full border-2 border-[#efc2aa]/50 bg-[#efc2aa]/10"
+                    />
+
+                    <motion.div
+                      animate={{
+                        y: [0, -12, 0]
+                      }}
+                      transition={{
+                        duration: 1.8,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                      className="relative z-10 flex flex-col items-center"
+                    >
+                      <motion.div
+                        animate={{
+                          scale: [0.7, 1.3, 0.7],
+                          opacity: [0.8, 0.2, 0.8]
+                        }}
+                        transition={{
+                          duration: 1.8,
+                          repeat: Infinity,
+                          ease: "easeInOut"
+                        }}
+                        className="absolute -bottom-1 h-1.5 w-5 rounded-full bg-black/60 blur-[1.5px]"
+                      />
+                      
+                      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-tr from-[#c88e71] to-[#efc2aa] shadow-xl border border-white/20">
+                        <MapPin className="h-6 w-6 text-black" fill="black" />
+                      </div>
+                    </motion.div>
                   </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          );
-        })}
+                </div>
+
+                <div className="relative mt-auto w-full pointer-events-auto">
+                  <div className="rounded-2xl border border-white/10 bg-black/80 p-5 backdrop-blur-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-2xl">
+                    <div>
+                      <h4 className="font-cinzel text-[#efc2aa] font-semibold tracking-wide text-base">Lavelle Residences</h4>
+                      <p className="text-xs text-white/60 mt-1">Bugolobi, Kampala — Uganda</p>
+                    </div>
+                    <div className="flex items-center gap-2 w-full sm:w-auto">
+                      <Button
+                        size="sm"
+                        onClick={() => setIsMapInteractive(true)}
+                        className="flex-1 sm:flex-initial rounded-full bg-gradient-to-r from-[#c88e71] to-[#efc2aa] text-black font-semibold hover:opacity-90 transition-all duration-300 text-xs px-4 py-2"
+                      >
+                        Explore Map
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => window.open("https://maps.app.goo.gl/DjXtxFmKRbyxX39R6?g_st=aw", "_blank")}
+                        className="flex-1 sm:flex-initial rounded-full border-white/15 bg-white/5 text-white hover:bg-white/10 text-xs px-4 py-2"
+                      >
+                        Directions
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {isMapInteractive && (
+            <motion.button
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              onClick={() => setIsMapInteractive(false)}
+              className="absolute top-4 right-4 z-20 flex items-center gap-1.5 rounded-full border border-white/10 bg-black/85 px-3.5 py-2 text-xs font-semibold text-white hover:bg-black hover:border-white/20 transition-all shadow-lg pointer-events-auto"
+            >
+              <Lock className="h-3.5 w-3.5 text-[#efc2aa]" />
+              Lock Map
+            </motion.button>
+          )}
+        </motion.div>
       </div>
+
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
