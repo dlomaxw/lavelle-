@@ -40,6 +40,12 @@ import {
   CreditCard,
   CalendarCheck,
   Lock,
+  HardHat,
+  Hammer,
+  KeyRound,
+  PlayCircle,
+  Mountain,
+  CheckCircle2,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import InteriorShowcase from "@/components/InteriorShowcase";
@@ -285,6 +291,71 @@ const whyLavelle = [
   { icon: ArrowUpDown, text: "3 high-speed elevators, full backup power, and water reserves." },
   { icon: Trees, text: "Cascading green facade and landscaped gardens on every side." },
   { icon: CreditCard, text: "Flexible payment plans tailored around you." },
+];
+
+// ─── Construction progress (real site photos, June 2026) ──────────────────────
+
+const constructionPhotos = [
+  {
+    image: "/construction/construction-floor-plate-aerial.jpg",
+    title: "Lower Floor Slab Cast",
+    alt: "Lavelle Bugolobi construction progress June 2026 — aerial of the cast concrete floor slab and column grid in Kampala",
+  },
+  {
+    image: "/construction/construction-formwork-rebar.jpg",
+    title: "Formwork & Reinforcement",
+    alt: "Lavelle Bugolobi construction — timber formwork and steel reinforcement for the next floor of the Kampala apartment building",
+  },
+  {
+    image: "/construction/construction-lower-floor-walls.jpg",
+    title: "Walls Going Up",
+    alt: "Lavelle Bugolobi construction progress — masonry walls and columns rising on the lower floors in Kampala, Uganda",
+  },
+  {
+    image: "/construction/construction-columns-slab.jpg",
+    title: "Columns & Crew On Site",
+    alt: "Lavelle Bugolobi building site — reinforced columns and slab with the construction crew working in Bugolobi, Kampala",
+  },
+  {
+    image: "/construction/construction-floor-walls-rooms.jpg",
+    title: "Apartment Layouts Forming",
+    alt: "Lavelle Bugolobi construction — block walls forming the apartment room layouts on a residential floor in Kampala",
+  },
+  {
+    image: "/construction/construction-superstructure-aerial.jpg",
+    title: "Superstructure Underway",
+    alt: "Lavelle Bugolobi superstructure under construction June 2026 — aerial view of the apartment building in Bugolobi, Kampala",
+  },
+];
+
+const constructionViews = [
+  {
+    image: "/construction/view-lake-victoria-islands.jpg",
+    title: "Lake Victoria Views",
+    alt: "View of Lake Victoria and islands from Lavelle Bugolobi — apartments for sale in Kampala with lake views",
+  },
+  {
+    image: "/construction/view-lake-victoria-wide.jpg",
+    title: "Across the Water",
+    alt: "Panoramic Lake Victoria view from the Lavelle Bugolobi apartment site in Kampala, Uganda",
+  },
+  {
+    image: "/construction/view-kampala-skyline.jpg",
+    title: "Kampala Skyline",
+    alt: "Kampala city skyline seen from Lavelle Bugolobi — luxury apartments and penthouses with city views",
+  },
+  {
+    image: "/construction/view-kampala-hills.jpg",
+    title: "The Kampala Hills",
+    alt: "Rolling Kampala hills panorama from the upper floors of Lavelle Bugolobi in Kampala, Uganda",
+  },
+];
+
+const constructionTimeline = [
+  { icon: CheckCircle2, label: "Land & Foundation", state: "done" as const },
+  { icon: HardHat, label: "Superstructure", state: "active" as const },
+  { icon: Hammer, label: "Finishing & Fit-out", state: "upcoming" as const },
+  { icon: KeyRound, label: "Handover", state: "upcoming" as const },
 ];
 
 // ─── Shared helpers ───────────────────────────────────────────────────────────
@@ -1033,6 +1104,206 @@ function AmenitiesSection() {
           );
         })}
       </div>
+    </section>
+  );
+}
+
+function ConstructionSection({ onImageClick }: { onImageClick: (img: string) => void }) {
+  const settings = React.useContext(SettingsContext);
+  const [tab, setTab] = useState<"progress" | "views">("progress");
+  const photos = tab === "progress" ? constructionPhotos : constructionViews;
+
+  return (
+    <section className="space-y-8" id="construction">
+      <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+        <SectionTitle
+          eyebrow="Construction Progress"
+          title="Watch Lavelle take shape"
+          text="These are real photos from the Lavelle site in Bugolobi, captured in June 2026. The foundation is complete and the superstructure is now rising — buy early, off-plan, at today's best prices."
+        />
+        {/* Live status badge */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="flex items-center gap-3 self-start rounded-full border border-[#c88e71]/30 bg-[#c88e71]/10 px-5 py-3"
+        >
+          <span className="relative flex h-2.5 w-2.5">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#c88e71] opacity-70" />
+            <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#c88e71]" />
+          </span>
+          <div className="text-left">
+            <div className="text-xs font-semibold text-white">Under Construction</div>
+            <div className="text-[10px] uppercase tracking-[0.2em] text-white/50">Updated June 2026</div>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Build timeline */}
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+        {constructionTimeline.map((step, i) => {
+          const Icon = step.icon;
+          const done = step.state === "done";
+          const active = step.state === "active";
+          return (
+            <motion.div
+              key={step.label}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: i * 0.1 }}
+              className={`relative overflow-hidden rounded-[1.3rem] border p-5 ${
+                active
+                  ? "border-[#c88e71]/40 bg-[#c88e71]/10"
+                  : done
+                  ? "border-emerald-400/25 bg-emerald-400/5"
+                  : "border-white/10 bg-white/5"
+              }`}
+            >
+              <div
+                className={`mb-3 flex h-10 w-10 items-center justify-center rounded-xl ${
+                  active ? "bg-[#c88e71] text-black" : done ? "bg-emerald-400/20 text-emerald-300" : "bg-white/10 text-white/50"
+                }`}
+              >
+                <Icon className="h-5 w-5" />
+              </div>
+              <div className="text-sm font-semibold text-white">{step.label}</div>
+              <div
+                className={`mt-1 text-[10px] font-semibold uppercase tracking-[0.15em] ${
+                  active ? "text-[#efc2aa]" : done ? "text-emerald-300/80" : "text-white/40"
+                }`}
+              >
+                {done ? "Complete" : active ? "In Progress" : "Upcoming"}
+              </div>
+              {active && (
+                <motion.div
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
+                  style={{ transformOrigin: "left" }}
+                  className="absolute bottom-0 left-0 h-[3px] w-full bg-gradient-to-r from-[#c88e71] to-[#efc2aa]"
+                />
+              )}
+            </motion.div>
+          );
+        })}
+      </div>
+
+      {/* Drone video */}
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        className="relative"
+      >
+        <div className="absolute -inset-3 rounded-[2rem] bg-[#c88e71]/8 blur-2xl pointer-events-none" />
+        <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-black/60 shadow-2xl shadow-black/60">
+          <video
+            controls
+            playsInline
+            preload="metadata"
+            poster="/construction/construction-superstructure-aerial.jpg"
+            className="h-[280px] w-full object-cover md:h-[520px]"
+          >
+            <source src="/construction/lavelle-construction-progress.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <div className="pointer-events-none absolute left-5 top-5 flex items-center gap-2 rounded-full border border-white/10 bg-black/60 px-4 py-2 backdrop-blur-md">
+            <PlayCircle className="h-4 w-4 text-[#efc2aa]" />
+            <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/80">Site Drone Tour · June 2026</span>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Progress / Views toggle */}
+      <div className="flex gap-1.5 self-start rounded-full border border-white/10 bg-black/40 p-1.5 w-fit">
+        {([["progress", "Site Progress", HardHat], ["views", "The Views", Mountain]] as const).map(([key, label, Icon]) => (
+          <button
+            key={key}
+            onClick={() => setTab(key)}
+            className={`flex items-center gap-2 rounded-full px-5 py-2.5 text-xs font-semibold tracking-wide transition-all duration-300 ${
+              tab === key
+                ? "bg-[#c88e71] text-black shadow-lg shadow-[#c88e71]/15"
+                : "text-white/55 hover:text-white hover:bg-white/5"
+            }`}
+          >
+            <Icon className="h-3.5 w-3.5" />
+            {label}
+          </button>
+        ))}
+      </div>
+
+      {/* Photo grid */}
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {photos.map((photo, i) => (
+          <motion.div
+            key={photo.image}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: (i % 3) * 0.08 }}
+            className="group relative cursor-pointer overflow-hidden rounded-[1.4rem] border border-white/10"
+            onClick={() => onImageClick(photo.image)}
+          >
+            <img
+              src={photo.image}
+              alt={photo.alt}
+              loading="lazy"
+              className="h-60 w-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+            <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors duration-500 group-hover:bg-black/20">
+              <ZoomIn className="h-9 w-9 scale-50 text-white opacity-0 drop-shadow-xl transition-all duration-500 group-hover:scale-100 group-hover:opacity-100" />
+            </div>
+            <div className="absolute bottom-4 left-4 right-4">
+              <div className="flex items-center gap-2">
+                {tab === "progress" ? (
+                  <HardHat className="h-3.5 w-3.5 text-[#efc2aa]" />
+                ) : (
+                  <Mountain className="h-3.5 w-3.5 text-[#efc2aa]" />
+                )}
+                <span className="text-sm font-semibold text-white drop-shadow">{photo.title}</span>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* CTA */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="flex flex-wrap items-center justify-between gap-4 rounded-[1.5rem] border border-white/10 bg-white/5 px-6 py-5"
+      >
+        <p className="text-sm text-white/70">
+          Want the latest site update or a guided visit? Our team will walk you through every stage.
+        </p>
+        <div className="flex flex-wrap gap-3">
+          <Button
+            className="rounded-full bg-[#c88e71] px-6 text-black hover:bg-[#ddb09a]"
+            onClick={() =>
+              window.open(
+                `https://wa.me/${settings.waNumber}?text=Hello%20Lavelle%2C%20please%20share%20the%20latest%20construction%20update.`,
+                "_blank"
+              )
+            }
+          >
+            <MessageCircle className="mr-2 h-4 w-4" /> Get Latest Update
+          </Button>
+          <Button
+            variant="outline"
+            className="rounded-full border-white/15 bg-white/5 px-6 text-white hover:bg-white/10"
+            onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+          >
+            <Calendar className="mr-2 h-4 w-4" /> Book a Site Visit
+          </Button>
+        </div>
+      </motion.div>
     </section>
   );
 }
@@ -2036,6 +2307,7 @@ export default function LavelleWebsite() {
     ["interiors", "Interiors"],
     ["amenities", "Amenities"],
     ["gallery", "Gallery"],
+    ["construction", "Progress"],
     ["location", "Location"],
     ["payments", "Payments"],
     ["contact", "Contact"],
@@ -2132,6 +2404,7 @@ export default function LavelleWebsite() {
           <InteriorShowcase />
           <AmenitiesSection />
           <GallerySection onImageClick={setSelectedImage} />
+          <ConstructionSection onImageClick={setSelectedImage} />
           <LocationSection />
           <PaymentPlansSection />
           <ContactSection />
@@ -2185,7 +2458,7 @@ export default function LavelleWebsite() {
           <div>
             <div className="mb-3 font-semibold">Pages</div>
             <div className="grid gap-2 text-sm text-white/60">
-              {[["about", "About"], ["why", "Why Lavelle"], ["residences", "Residences"], ["interiors", "Interiors"], ["amenities", "Amenities"], ["gallery", "Gallery"], ["location", "Location"], ["payments", "Payment Plans"], ["contact", "Contact"]].map(
+              {[["about", "About"], ["why", "Why Lavelle"], ["residences", "Residences"], ["interiors", "Interiors"], ["amenities", "Amenities"], ["gallery", "Gallery"], ["construction", "Construction Progress"], ["location", "Location"], ["payments", "Payment Plans"], ["contact", "Contact"]].map(
                 ([id, label]) => (
                   <button key={id} className="text-left hover:text-white" onClick={() => scrollToSection(id)}>
                     {label}

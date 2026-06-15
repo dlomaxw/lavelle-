@@ -32,3 +32,6 @@ Thumbs.db
 # Agent files
 .claude/
 
+
+# Raw source media (originals live outside the repo)
+construction progress/
