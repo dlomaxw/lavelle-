@@ -141,7 +141,6 @@ const amenities = [
   { icon: Car, title: "Podium & Basement Parking", text: "Generous controlled-access resident and visitor parking across two podium levels." },
   { icon: ShieldCheck, title: "24/7 Security & CCTV", text: "Gated perimeter, manned gatehouse, and round-the-clock monitoring." },
   { icon: Dumbbell, title: "Fitness Studio", text: "Contemporary training space for daily wellness." },
-  { icon: Bath, title: "Sauna & Spa", text: "Thermal steam rooms and sauna suites for daily relaxation." },
   { icon: Baby, title: "Children's Play Area", text: "Dedicated, safely fenced outdoor play zone within the gardens." },
   { icon: Trees, title: "Landscaped Gardens & Lounge", text: "Garden seating courts, pergolas, and a fire-pit lounge wrapped in greenery." },
   { icon: Zap, title: "Full Backup Power", text: "Standby generator power keeps every residence and amenity running." },
