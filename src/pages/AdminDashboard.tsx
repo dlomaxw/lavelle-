@@ -71,8 +71,8 @@ export default function AdminDashboard() {
   // Settings State
   const [siteSettings, setSiteSettings] = useState({
     heroVideoUrl: "https://www.youtube.com/embed/bQaBlh1N7IA?autoplay=1&mute=1&controls=0&loop=1&playlist=bQaBlh1N7IA&rel=0&playsinline=1&vq=hd1080",
-    waNumber: "256791224477",
-    contactPhone: "+256 791 224 477",
+    waNumber: "256791272727",
+    contactPhone: "+256 791 272727",
     residence1Price: "$168,000",
     residence2Price: "$245,000",
     residence3Price: "$390,000"
@@ -435,8 +435,8 @@ export default function AdminDashboard() {
                   <div className="space-y-4">
                     <h3 className="text-lg font-medium text-[#c88e71]">Contact Information</h3>
                     <div className="grid gap-4 md:grid-cols-2">
-                      <div className="grid gap-2">
-                        <label className="text-sm text-white/70">WhatsApp Number (e.g., 256791224477)</label>
+                       <div className="grid gap-2">
+                        <label className="text-sm text-white/70">WhatsApp Number (e.g., 256791272727)</label>
                         <Input
                           value={siteSettings.waNumber}
                           onChange={(e) => setSiteSettings({ ...siteSettings, waNumber: e.target.value })}
