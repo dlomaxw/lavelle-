@@ -73,7 +73,8 @@ export const DEFAULT_SETTINGS = {
   contactEmail2: "despotic62@gmail.com",
   residence1Price: "$168,000",
   residence2Price: "$245,000",
-  residence3Price: "$390,000"
+  residence3Price: "$390,000",
+  residence4Price: "$590,000"
 };
 
 export const SettingsContext = React.createContext(DEFAULT_SETTINGS);
@@ -123,16 +124,29 @@ const residences = [
   },
   {
     id: 3,
-    name: "Penthouses",
-    units: 4,
-    beds: 4,
-    baths: 4,
-    size: "248 sqm",
-    status: "4 Units",
+    name: "3 BHK Penthouses",
+    units: 2,
+    beds: 3,
+    baths: 3,
+    size: "300 sqm",
+    status: "2 Units",
     image: "/exterior/lavelle-rooftop-aerial.jpg",
-    alt: "Penthouse for sale in Kampala — rooftop terraces of Lavelle Bugolobi, 248 sqm from $390,000",
+    alt: "3 Bedroom Penthouse for sale in Kampala — tri-level penthouse at Lavelle Bugolobi, 300 sqm from $390,000",
     blurb:
-      "Four exclusive top-floor penthouses with statement interiors, entertaining zones, and sweeping skyline-facing terraces.",
+      "Two exclusive tri-level penthouses with private sky lounge, formal dining, and sweeping skyline-facing terraces.",
+  },
+  {
+    id: 4,
+    name: "5 BHK Penthouses",
+    units: 2,
+    beds: 5,
+    baths: 5,
+    size: "450 sqm",
+    status: "2 Units",
+    image: "/exterior/lavelle-tower-portrait.jpg",
+    alt: "5 Bedroom Penthouse for sale in Kampala — grand tri-level penthouse at Lavelle Bugolobi, 450 sqm from $590,000",
+    blurb:
+      "Two grand tri-level penthouses of uncompromising scale, featuring dual kitchens, private hot bath, and panoramic sky deck.",
   },
 ];
 
@@ -922,7 +936,8 @@ function ResidencesSection({ onImageClick }: { onImageClick: (img: string) => vo
           {[
             ["15", "2 BHK"],
             ["16", "3 BHK"],
-            ["04", "PENTHOUSES"],
+            ["02", "3BHK PENT"],
+            ["02", "5BHK PENT"],
           ].map(([val, label], idx) => (
             <div key={label} className="flex items-center gap-5">
               {idx > 0 && <div className="h-7 w-[1px] bg-white/10" />}
@@ -935,7 +950,7 @@ function ResidencesSection({ onImageClick }: { onImageClick: (img: string) => vo
         </motion.div>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-3">
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {residences.map((item) => (
           <motion.div
             key={item.id}
@@ -982,7 +997,13 @@ function ResidencesSection({ onImageClick }: { onImageClick: (img: string) => vo
                       transition={{ type: "spring", damping: 18, stiffness: 200, delay: 0.3 }}
                       className="text-2xl font-semibold text-[#efc2aa]"
                     >
-                      {item.id === 1 ? settings.residence1Price : item.id === 2 ? settings.residence2Price : settings.residence3Price}
+                      {item.id === 1 
+                        ? settings.residence1Price 
+                        : item.id === 2 
+                        ? settings.residence2Price 
+                        : item.id === 3 
+                        ? settings.residence3Price 
+                        : settings.residence4Price}
                     </motion.div>
                   </div>
                 </div>
@@ -1067,6 +1088,285 @@ function ResidencesSection({ onImageClick }: { onImageClick: (img: string) => vo
           </div>
         </div>
       </motion.div>
+    </section>
+  );
+}
+
+function FloorPlansSection({ onImageClick }: { onImageClick: (src: string) => void }) {
+  const [activeTab, setActiveTab] = useState<string>("2 BHK Residences");
+  const [activePlan, setActivePlan] = useState<string>("2bhk-typical");
+
+  const plans = [
+    {
+      id: "2bhk-typical",
+      category: "2 BHK Residences",
+      title: "Typical 2 BHK Layout (150 sqm)",
+      desc: "A refined 150 sqm two-bedroom apartment that combines compact luxury with intelligent spatial planning. Features a bright, open lounge, a dining area connecting smoothly to a well-equipped kitchen with a utility balcony, and a private wing with two well-proportioned bedrooms.",
+      specs: [
+        { label: "Foyer", val: "1.5m x 2.3m" },
+        { label: "Lounge", val: "5.0m x 5.2m" },
+        { label: "Lounge Viewing Deck", val: "5.7m x 2.0m" },
+        { label: "Dining", val: "2.8m x 5.2m" },
+        { label: "Kitchen & Balcony", val: "5.7m x 2.1m" },
+        { label: "Bedroom 1", val: "4.0m x 3.5m" },
+        { label: "Bedroom 2", val: "4.0m x 4.8m" },
+      ],
+      image: "/floor plan/3.png"
+    },
+    {
+      id: "2bhk-signature",
+      category: "2 BHK Residences",
+      title: "First Floor Signature 2 BHK (185 sqm)",
+      desc: "The inaugural residence level establishes the tone of the development with a grand spatial narrative. Features a commanding formal lounge, a grand foyer of true architectural presence, and an expansive utility balcony that dissolves the boundary between interior comfort and the lush external environment.",
+      specs: [
+        { label: "Foyer", val: "1.5m x 2.3m" },
+        { label: "Lounge", val: "5.0m x 5.2m" },
+        { label: "Lounge Viewing Deck", val: "10.0m x 4.8m" },
+        { label: "Dining", val: "2.8m x 5.2m" },
+        { label: "Kitchen & Balcony", val: "5.7m x 2.1m" },
+        { label: "Bedroom 1 & Closet", val: "4.0m x 3.5m" },
+        { label: "Bedroom 2", val: "4.0m x 4.8m" },
+      ],
+      image: "/floor plan/1.png"
+    },
+    {
+      id: "3bhk-typical",
+      category: "3 BHK Residences",
+      title: "Typical 3 BHK Layout (200 sqm)",
+      desc: "A refined three-bedroom apartment that blends contemporary elegance with practical family living. The home opens with a welcoming foyer leading into a spacious open-plan lounge extending onto a generous viewing deck. The private wing features two well-sized bedrooms and a master suite with a walk-in wardrobe and en-suite.",
+      specs: [
+        { label: "Foyer", val: "1.5m x 1.2m" },
+        { label: "Lounge", val: "5.4m x 6.0m" },
+        { label: "Lounge Terrace", val: "8.0m x 2.0m" },
+        { label: "Dining", val: "5.4m x 2.8m" },
+        { label: "Kitchen & Balcony", val: "3.8m x 2.6m" },
+        { label: "Master Suite", val: "4.0m x 3.6m" },
+        { label: "Bedroom 2", val: "4.0m x 4.0m" },
+        { label: "Bedroom 3", val: "4.2m x 4.5m" },
+      ],
+      image: "/floor plan/4.png"
+    },
+    {
+      id: "3bhk-pent-l12",
+      category: "3 BHK Penthouses",
+      title: "3 BHK Penthouse — Levels 1 & 2 (300 sqm)",
+      desc: "Level 1 introduces a refined entertainment floor anchored by an intimate lounge opening onto a private terrace, connecting to a professional-grade kitchen. Level 2 transitions into a private family domain defined by a family lounge overlooking the double-height void and bedrooms arranged as private sanctuaries.",
+      specs: [
+        { label: "Foyer", val: "2.8m x 5.2m" },
+        { label: "Lounge", val: "1.2m x 2.4m" },
+        { label: "Lounge Terrace", val: "3.6m x 3.5m" },
+        { label: "Dining", val: "2.4m x 2.1m" },
+        { label: "Kitchen", val: "1.4m x 1.6m" },
+        { label: "Staircase", val: "4.8m x 2.3m" },
+        { label: "Family Room", val: "4.1m x 5.2m" },
+      ],
+      image: "/floor plan/5.png"
+    },
+    {
+      id: "3bhk-pent-l3",
+      category: "3 BHK Penthouses",
+      title: "3 BHK Penthouse — Level 3 (Sky Light)",
+      desc: "Level 3 completes the penthouse as an exclusive sky deck. This level combines staff accommodation, service areas, and a vast open terrace designed for leisure, entertainment, and private retreat under a central skylight.",
+      specs: [
+        { label: "Lobby", val: "2.4m x 3.9m" },
+        { label: "Servant Quarter", val: "2.2m x 2.7m" },
+        { label: "Washroom", val: "2.2m x 1.3m" },
+        { label: "Staircase", val: "4.8m x 2.1m" },
+        { label: "Terrace", val: "4.9m x 10.2m" },
+        { label: "Hot Bath", val: "4.6m x 2.3m" },
+      ],
+      image: "/floor plan/6.png"
+    },
+    {
+      id: "5bhk-pent-l12",
+      category: "5 BHK Penthouses",
+      title: "Grand 5 BHK Penthouse — Levels 1 & 2 (450 sqm)",
+      desc: "Level 1 establishes a ceremonial arrival sequence leading into a grand salon and expansive terrace, supported by guest suites and an executive office. Level 2 elevates living into a dual-salon experience centered around a dramatic double-height void with master suites and secondary suites.",
+      specs: [
+        { label: "Foyer", val: "1.5m x 0.5m" },
+        { label: "Lounge", val: "5.4m x 6.0m" },
+        { label: "Lounge Terrace", val: "8.0m x 2.0m" },
+        { label: "Dining", val: "5.4m x 4.0m" },
+        { label: "Dry Kitchen", val: "4.2m x 3.6m" },
+        { label: "Staircase", val: "3.1m x 4.2m" },
+        { label: "Office / Study", val: "2.8m x 2.7m" },
+      ],
+      image: "/floor plan/7.png"
+    },
+    {
+      id: "5bhk-pent-l3",
+      category: "5 BHK Penthouses",
+      title: "Grand 5 BHK Penthouse — Level 3 (Sky Deck)",
+      desc: "Level 3 completes the penthouse as an elevated sky estate. A vast L-shaped terrace wraps the entire structure, creating a panoramic outdoor domain for entertainment at scale with a sculptural skylight and private hot bath.",
+      specs: [
+        { label: "Lobby", val: "2.0m x 2.6m" },
+        { label: "Servant Quarter", val: "2.3m x 2.6m" },
+        { label: "Washroom", val: "1.5m x 2.6m" },
+        { label: "Staircase", val: "3.1m x 4.2m" },
+        { label: "Terrace", val: "16.8m x 13.5m" },
+        { label: "Hot Bath", val: "4.6m x 2.8m" },
+      ],
+      image: "/floor plan/8.png"
+    },
+    {
+      id: "typical-plate",
+      category: "Typical Floor Plate",
+      title: "Typical Floor Layout Plate",
+      desc: "A symmetrically arranged typical floor plate designed to maximize efficiency and privacy. Symmetrically arranged apartments organize circulation around a central core with three passenger elevators, service lift, and dedicated rubbish chute, creating an intuitive flow throughout the tower.",
+      specs: [
+        { label: "Circulation Lobby", val: "31 sqm" },
+        { label: "Symmetry Layout", val: "4 Units per floor" },
+        { label: "Elevators", val: "3 high-speed + 1 service" },
+        { label: "Ventilation", val: "Dual-aspect natural flow" },
+      ],
+      image: "/floor plan/2.png"
+    }
+  ];
+
+  const categories = [
+    "Typical Floor Plate",
+    "2 BHK Residences",
+    "3 BHK Residences",
+    "3 BHK Penthouses",
+    "5 BHK Penthouses"
+  ];
+
+  const handleCategoryChange = (cat: string) => {
+    setActiveTab(cat);
+    const firstPlan = plans.find(p => p.category === cat);
+    if (firstPlan) {
+      setActivePlan(firstPlan.id);
+    }
+  };
+
+  const currentCategoryPlans = plans.filter(p => p.category === activeTab);
+  const currentPlan = plans.find(p => p.id === activePlan) || currentCategoryPlans[0] || plans[0];
+
+  return (
+    <section className="space-y-8 animate-fade-in" id="floorplans">
+      <SectionTitle
+        eyebrow="Floor Plans"
+        title="Intelligent layouts, engineered for luxury"
+        text="Explore the architectural configurations of our boutique residences and penthouses. Designed with dual-aspect ventilation, deep terraces, and separate private wings."
+      />
+
+      {/* Main Tabs Navigation */}
+      <div className="flex flex-wrap gap-2.5 border-b border-white/10 pb-4">
+        {categories.map((cat) => (
+          <button
+            key={cat}
+            onClick={() => handleCategoryChange(cat)}
+            className={`rounded-full px-5 py-2.5 text-sm font-medium transition-all duration-300 ${
+              activeTab === cat
+                ? "bg-[#c88e71] text-black font-semibold shadow-lg"
+                : "border border-white/10 bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
+            }`}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      {/* Layout Grid */}
+      <div className="grid gap-8 lg:grid-cols-[1fr_1.2fr] items-start">
+        {/* Left Column: Plan Selector & Specs */}
+        <div className="space-y-6">
+          {/* Sub-tabs if there are multiple plans in this category */}
+          {currentCategoryPlans.length > 1 && (
+            <div className="flex gap-2 rounded-xl bg-black/40 p-1.5 border border-white/5">
+              {currentCategoryPlans.map((p) => (
+                <button
+                  key={p.id}
+                  onClick={() => setActivePlan(p.id)}
+                  className={`flex-1 rounded-lg py-2 text-xs font-medium transition-all duration-300 ${
+                    activePlan === p.id
+                      ? "bg-white/10 text-white border border-white/10"
+                      : "text-white/55 hover:text-white"
+                  }`}
+                >
+                  {p.title.includes("Typical") || p.title.includes("Signature")
+                    ? p.title.split("(")[0].trim()
+                    : p.title.split("—")[1]?.trim() || p.title}
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* Description Card */}
+          <Card className="rounded-[1.6rem] border-white/10 bg-white/5 text-white overflow-hidden">
+            <CardContent className="p-6 space-y-6">
+              <div className="space-y-2">
+                <h4 className="text-xl font-semibold text-[#efc2aa]">{currentPlan.title}</h4>
+                <p className="text-sm leading-7 text-white/65">{currentPlan.desc}</p>
+              </div>
+
+              {/* Specs List */}
+              <div className="space-y-3 pt-2">
+                <h5 className="text-xs font-semibold uppercase tracking-wider text-white/40">Layout Specifications</h5>
+                <div className="grid gap-2 sm:grid-cols-2">
+                  {currentPlan.specs.map((s) => (
+                    <div key={s.label} className="flex items-center justify-between border-b border-white/5 pb-2 text-xs">
+                      <span className="text-white/50">{s.label}</span>
+                      <span className="font-semibold text-white">{s.val}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-wrap gap-3 pt-2">
+                <Button
+                  className="flex-1 rounded-full bg-[#c88e71] text-black hover:bg-[#ddb09a] text-xs font-semibold py-5"
+                  onClick={() => {
+                    window.open(
+                      `https://wa.me/256791272727?text=Hello%20Lavelle%2C%20I'm%20interested%20in%20the%20${encodeURIComponent(
+                        currentPlan.title
+                      )}%20layout.`,
+                      "_blank"
+                    );
+                  }}
+                >
+                  <MessageCircle className="mr-2 h-4 w-4" /> Inquire on WhatsApp
+                </Button>
+                <a
+                  href="/downloads/lavelle%20BOOKLET.pdf"
+                  download="Lavelle-Booklet.pdf"
+                  className="flex-1"
+                >
+                  <Button
+                    variant="outline"
+                    className="w-full rounded-full border-white/15 bg-white/5 text-white hover:bg-white/10 text-xs font-semibold py-5"
+                  >
+                    <Download className="mr-2 h-4 w-4" /> Download PDF
+                  </Button>
+                </a>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Right Column: Interactive Plan Viewport */}
+        <motion.div
+          key={currentPlan.id}
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.4 }}
+          className="relative rounded-[2rem] border border-white/10 bg-white/5 overflow-hidden group shadow-2xl flex flex-col p-4 items-center justify-center cursor-pointer min-h-[450px]"
+          onClick={() => onImageClick(currentPlan.image)}
+        >
+          <img
+            src={currentPlan.image}
+            alt={currentPlan.title}
+            className="max-h-[500px] w-auto object-contain transition-transform duration-700 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500 flex items-center justify-center">
+            <ZoomIn className="text-white drop-shadow-xl opacity-0 group-hover:opacity-100 transition-all duration-500 h-10 w-10 scale-50 group-hover:scale-100" />
+          </div>
+          <Badge className="absolute right-4 bottom-4 bg-black/70 text-white/80 hover:bg-black/70 backdrop-blur-md text-[10px]">
+            Click to expand layout
+          </Badge>
+        </motion.div>
+      </div>
     </section>
   );
 }
@@ -2303,6 +2603,7 @@ export default function LavelleWebsite() {
     ["home", "Home"],
     ["about", "About"],
     ["residences", "Residences"],
+    ["floorplans", "Plans"],
     ["interiors", "Interiors"],
     ["amenities", "Amenities"],
     ["gallery", "Gallery"],
@@ -2400,6 +2701,9 @@ export default function LavelleWebsite() {
           <AboutSection />
           <WhyLavelleSection onImageClick={setSelectedImage} />
           <ResidencesSection onImageClick={setSelectedImage} />
+          <div id="floorplans">
+            <FloorPlansSection onImageClick={setSelectedImage} />
+          </div>
           <InteriorShowcase />
           <AmenitiesSection />
           <GallerySection onImageClick={setSelectedImage} />
@@ -2457,7 +2761,7 @@ export default function LavelleWebsite() {
           <div>
             <div className="mb-3 font-semibold">Pages</div>
             <div className="grid gap-2 text-sm text-white/60">
-              {[["about", "About"], ["why", "Why Lavelle"], ["residences", "Residences"], ["interiors", "Interiors"], ["amenities", "Amenities"], ["gallery", "Gallery"], ["construction", "Construction Progress"], ["location", "Location"], ["payments", "Payment Plans"], ["contact", "Contact"]].map(
+              {[["about", "About"], ["why", "Why Lavelle"], ["residences", "Residences"], ["floorplans", "Floor Plans"], ["interiors", "Interiors"], ["amenities", "Amenities"], ["gallery", "Gallery"], ["construction", "Construction Progress"], ["location", "Location"], ["payments", "Payment Plans"], ["contact", "Contact"]].map(
                 ([id, label]) => (
                   <button key={id} className="text-left hover:text-white" onClick={() => scrollToSection(id)}>
                     {label}
