@@ -73,7 +73,8 @@ export const DEFAULT_SETTINGS = {
   contactEmail2: "despotic62@gmail.com",
   residence1Price: "$168,000",
   residence2Price: "$245,000",
-  residence3Price: "$390,000"
+  residence3Price: "$390,000",
+  residence4Price: "$590,000"
 };
 
 export const SettingsContext = React.createContext(DEFAULT_SETTINGS);
@@ -2304,6 +2305,7 @@ export default function LavelleWebsite() {
     ["home", "Home"],
     ["about", "About"],
     ["residences", "Residences"],
+    ["floorplans", "Plans"],
     ["interiors", "Interiors"],
     ["amenities", "Amenities"],
     ["gallery", "Gallery"],
@@ -2401,6 +2403,9 @@ export default function LavelleWebsite() {
           <AboutSection />
           <WhyLavelleSection onImageClick={setSelectedImage} />
           <ResidencesSection onImageClick={setSelectedImage} />
+          <div id="floorplans">
+            <FloorPlansSection onImageClick={setSelectedImage} />
+          </div>
           <InteriorShowcase />
           <AmenitiesSection />
           <GallerySection onImageClick={setSelectedImage} />
