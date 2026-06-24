@@ -1620,9 +1620,8 @@ function PaymentPlansSection() {
             <h3 className="text-lg font-semibold text-white">Take Lavelle with you</h3>
           </div>
           <a
-            href="https://drive.google.com/file/d/1POnYabBNv8UtTHvxgAhjbyzhjVjDZfNw/view?usp=drive_link"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/downloads/lavelle%20BOOKLET.pdf"
+            download="Lavelle-Brochure.pdf"
             className="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-black/30 p-4 transition hover:border-[#c88e71]/30 hover:bg-black/50 group"
           >
             <div className="flex items-center gap-3.5">
@@ -1637,9 +1636,8 @@ function PaymentPlansSection() {
             <Download className="h-4 w-4 text-white/40 transition group-hover:text-[#efc2aa] group-hover:translate-y-0.5" />
           </a>
           <a
-            href="https://drive.google.com/file/d/1SomwoHtHstNuJeeBMXCG4mcw-fO7N2pd/view?usp=drive_link"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/downloads/lavelle%20BOOKLET.pdf"
+            download="Lavelle-Booklet.pdf"
             className="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-black/30 p-4 transition hover:border-[#c88e71]/30 hover:bg-black/50 group"
           >
             <div className="flex items-center gap-3.5">
@@ -2441,17 +2439,15 @@ export default function LavelleWebsite() {
             </p>
             <div className="mt-5 flex gap-3">
               <a
-                href="https://drive.google.com/file/d/1POnYabBNv8UtTHvxgAhjbyzhjVjDZfNw/view?usp=drive_link"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/downloads/lavelle%20BOOKLET.pdf"
+                download="Lavelle-Brochure.pdf"
                 className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs text-white/70 transition hover:bg-white/10 hover:text-white"
               >
                 <Download className="h-3.5 w-3.5" /> Brochure
               </a>
               <a
-                href="https://drive.google.com/file/d/1SomwoHtHstNuJeeBMXCG4mcw-fO7N2pd/view?usp=drive_link"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/downloads/lavelle%20BOOKLET.pdf"
+                download="Lavelle-Booklet.pdf"
                 className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs text-white/70 transition hover:bg-white/10 hover:text-white"
               >
                 <BookOpen className="h-3.5 w-3.5" /> Booklet
