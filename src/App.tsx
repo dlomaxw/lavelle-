@@ -71,10 +71,10 @@ export const DEFAULT_SETTINGS = {
   contactPhone: "+256 791 272727",
   contactEmail: "lavellebugolobi@outlook.com",
   contactEmail2: "despotic62@gmail.com",
-  residence1Price: "$168,000",
-  residence2Price: "$245,000",
-  residence3Price: "$390,000",
-  residence4Price: "$590,000"
+  residence1Price: "$215,000",
+  residence2Price: "$289,000",
+  residence3Price: "Enquiries Only",
+  residence4Price: "Enquiries Only"
 };
 
 export const SettingsContext = React.createContext(DEFAULT_SETTINGS);
@@ -99,54 +99,41 @@ const residences = [
   {
     id: 1,
     name: "2 BHK Residences",
-    units: 15,
+    units: 17,
     beds: 2,
     baths: 2,
-    size: "118 sqm",
-    status: "15 Units",
+    size: "150 sqm",
+    status: "17 Units",
     image: "/exterior/lavelle-balcony-detail.jpg",
-    alt: "2 bedroom apartment for sale in Bugolobi Kampala — panoramic terraces at Lavelle, 118 sqm from $168,000",
+    alt: "2 bedroom apartment for sale in Bugolobi Kampala — panoramic terraces at Lavelle, 150 sqm from $215,000",
     blurb:
       "Open-plan two-bedroom homes with warm earthy finishes, panoramic glazing, and private terrace living.",
   },
   {
     id: 2,
     name: "3 BHK Residences",
-    units: 16,
+    units: 18,
     beds: 3,
     baths: 3,
-    size: "176 sqm",
-    status: "16 Units",
+    size: "200 sqm",
+    status: "18 Units",
     image: "/exterior/lavelle-building-day.jpg",
-    alt: "3 bedroom apartment for sale in Bugolobi Kampala — Lavelle luxury residence tower, 176 sqm from $245,000",
+    alt: "3 bedroom apartment for sale in Bugolobi Kampala — Lavelle luxury residence tower, 200 sqm from $289,000",
     blurb:
       "Generous three-bedroom family residences designed for long-term comfort, privacy, and elevated everyday living.",
   },
   {
     id: 3,
-    name: "3 BHK Penthouses",
+    name: "4 BHK Penthouses",
     units: 2,
-    beds: 3,
-    baths: 3,
-    size: "300 sqm",
-    status: "2 Units",
+    beds: 4,
+    baths: 4,
+    size: "525 sqm",
+    status: "2 Units Only",
     image: "/exterior/lavelle-rooftop-aerial.jpg",
-    alt: "3 Bedroom Penthouse for sale in Kampala — tri-level penthouse at Lavelle Bugolobi, 300 sqm from $390,000",
+    alt: "4 Bedroom Penthouse for sale in Kampala — crowning tri-level penthouse at Lavelle Bugolobi, 525 sqm",
     blurb:
-      "Two exclusive tri-level penthouses with private sky lounge, formal dining, and sweeping skyline-facing terraces.",
-  },
-  {
-    id: 4,
-    name: "5 BHK Penthouses",
-    units: 2,
-    beds: 5,
-    baths: 5,
-    size: "450 sqm",
-    status: "2 Units",
-    image: "/exterior/lavelle-tower-portrait.jpg",
-    alt: "5 Bedroom Penthouse for sale in Kampala — grand tri-level penthouse at Lavelle Bugolobi, 450 sqm from $590,000",
-    blurb:
-      "Two grand tri-level penthouses of uncompromising scale, featuring dual kitchens, private hot bath, and panoramic sky deck.",
+      "Two exclusive crowning tri-level penthouses spanning 525 sqm with private sky lounge, formal dining, dual kitchens, and sweeping skyline-facing terraces.",
   },
 ];
 
@@ -160,7 +147,7 @@ const amenities = [
   { icon: Zap, title: "Full Backup Power", text: "Standby generator power keeps every residence and amenity running." },
   { icon: Droplets, title: "Water Reserves", text: "Rooftop reserve tanks and treatment for uninterrupted water supply." },
   { icon: Users, title: "Resident Lounge & Reception", text: "Refined double-height lobby and shared spaces for meetings and downtime." },
-  { icon: Building2, title: "Boutique Community", text: "Only 35 residences — a private, low-density address." },
+  { icon: Building2, title: "Boutique Community", text: "Only 37 residences — a private, low-density address." },
   { icon: Sparkles, title: "Fully Managed Building", text: "Professional facilities management and concierge-style services." },
 ];
 
@@ -298,7 +285,7 @@ const paymentPlans = [
 ];
 
 const whyLavelle = [
-  { icon: Building2, text: "A boutique community of only 35 residences — private and low-density." },
+  { icon: Building2, text: "A boutique community of only 37 residences — private and low-density." },
   { icon: Sparkles, text: "Signature earthy interiors with 3.2M ceilings and panoramic terraces." },
   { icon: MapPin, text: "Prime Bugolobi address — minutes from malls, schools, and the CBD." },
   { icon: ArrowUpDown, text: "3 high-speed elevators, full backup power, and water reserves." },
@@ -547,7 +534,7 @@ function RegisterInterestModal({ open, onClose }: { open: boolean; onClose: () =
                     <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#c88e71]">Welcome to Lavelle</p>
                     <h3 className="font-cinzel text-2xl tracking-wider">Register Your Interest</h3>
                     <p className="text-xs text-white/55">
-                      Only 35 residences. Leave your details and be the first to receive prices, plans, and availability.
+                      Only 37 residences. Leave your details and be the first to receive prices, plans, and availability.
                     </p>
                   </div>
 
@@ -700,7 +687,7 @@ function Hero({ onNavigate, onImageClick }: { onNavigate: (id: string) => void; 
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.7 }}
               className="font-cormorant text-lg md:text-xl italic text-[#efc2aa] tracking-wide text-center md:text-left font-medium"
             >
-              35 bespoke 2 &amp; 3 bedroom apartments and penthouses in Bugolobi, Kampala.
+              37 bespoke 2 &amp; 3 bedroom apartments and 4 bedroom penthouses in Bugolobi, Kampala.
             </motion.div>
 
             <motion.p
@@ -741,7 +728,7 @@ function Hero({ onNavigate, onImageClick }: { onNavigate: (id: string) => void; 
             className="flex items-center justify-center md:justify-start gap-6 pt-6 border-t border-white/5 max-w-md mx-auto md:mx-0 text-center md:text-left"
           >
             {[
-              ["35", "RESIDENCES"],
+              ["37", "RESIDENCES"],
               ["03", "ELEVATORS"],
               ["3.2M", "CEILING HEIGHT"],
             ].map(([val, label], idx) => (
@@ -786,7 +773,7 @@ function Hero({ onNavigate, onImageClick }: { onNavigate: (id: string) => void; 
                 <div className="h-2.5 w-[1px] bg-white/15" />
                 <div>3 Bath</div>
                 <div className="h-2.5 w-[1px] bg-white/15" />
-                <div>176 SQM</div>
+                <div>200 SQM</div>
               </div>
             </div>
           </div>
@@ -805,7 +792,7 @@ function AboutSection() {
           <SectionTitle
             eyebrow="About Us"
             title="Lavelle — a boutique address in the heart of Bugolobi"
-            text="Lavelle is an exclusive collection of 35 bespoke residences rising above Bugolobi's greenest enclave. Architecturally bold yet quietly refined, it pairs a signature earthy interior theme with cascading planted terraces, 3.2-metre ceilings, and panoramic views — a home built for those who value design, comfort, and enduring value."
+            text="Lavelle is an exclusive collection of 37 bespoke residences rising above Bugolobi's greenest enclave. Architecturally bold yet quietly refined, it pairs a signature earthy interior theme with cascading planted terraces, 3.2-metre ceilings, and panoramic views — a home built for those who value design, comfort, and enduring value."
           />
         </CardContent>
       </Card>
@@ -818,7 +805,7 @@ function AboutSection() {
             ],
             [
               "Boutique by design",
-              "Only 35 homes — 2 BHK, 3 BHK, and penthouse residences — for a private, low-density community.",
+              "Only 37 homes — 17 two-bedroom, 18 three-bedroom, and 2 penthouse residences — for a private, low-density community.",
             ],
             [
               "Signature interiors",
@@ -862,7 +849,7 @@ function WhyLavelleSection({ onImageClick }: { onImageClick: (img: string) => vo
           <div className="relative overflow-hidden rounded-[2rem] border border-white/10 shadow-2xl shadow-black/60">
             <motion.img
               src="/exterior/lavelle-front-elevation.jpg"
-              alt="Lavelle Bugolobi front elevation — boutique building of 35 luxury apartments and penthouses for sale in Kampala"
+              alt="Lavelle Bugolobi front elevation — boutique building of 37 luxury apartments and penthouses for sale in Kampala"
               className="h-[420px] md:h-[520px] w-full object-cover transition-transform duration-[1200ms] group-hover:scale-110"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
@@ -872,7 +859,7 @@ function WhyLavelleSection({ onImageClick }: { onImageClick: (img: string) => vo
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
               className="absolute left-5 top-5 rounded-2xl border border-white/10 bg-black/60 px-4 py-3 backdrop-blur-md"
             >
-              <div className="font-cinzel text-lg text-white">35</div>
+              <div className="font-cinzel text-lg text-white">37</div>
               <div className="text-[9px] uppercase tracking-[0.2em] text-white/50">Residences Only</div>
             </motion.div>
             <motion.div
@@ -922,8 +909,8 @@ function ResidencesSection({ onImageClick }: { onImageClick: (img: string) => vo
       <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
         <SectionTitle
           eyebrow="The Residences"
-          title="35 bespoke residences. Three ways to live."
-          text="A curated unit mix of two-bedroom homes, three-bedroom family residences, and four crowning penthouses — each with a private terrace and the Lavelle signature interior theme."
+          title="37 bespoke residences. Three ways to live."
+          text="A curated unit mix of 17 two-bedroom homes, 18 three-bedroom family residences, and 2 crowning penthouses — each with a private terrace and the Lavelle signature interior theme."
         />
         {/* Unit mix summary */}
         <motion.div
@@ -934,10 +921,9 @@ function ResidencesSection({ onImageClick }: { onImageClick: (img: string) => vo
           className="flex items-center gap-5 rounded-[1.4rem] border border-white/10 bg-white/5 px-6 py-4 self-start"
         >
           {[
-            ["15", "2 BHK"],
-            ["16", "3 BHK"],
-            ["02", "3BHK PENT"],
-            ["02", "5BHK PENT"],
+            ["17", "2 BHK"],
+            ["18", "3 BHK"],
+            ["02", "PENTHOUSES"],
           ].map(([val, label], idx) => (
             <div key={label} className="flex items-center gap-5">
               {idx > 0 && <div className="h-7 w-[1px] bg-white/10" />}
@@ -950,7 +936,7 @@ function ResidencesSection({ onImageClick }: { onImageClick: (img: string) => vo
         </motion.div>
       </div>
 
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {residences.map((item) => (
           <motion.div
             key={item.id}
@@ -988,7 +974,7 @@ function ResidencesSection({ onImageClick }: { onImageClick: (img: string) => vo
                       transition={{ duration: 0.7, delay: 0.2 }}
                       className="text-[10px] font-semibold uppercase text-white/40"
                     >
-                      Starting from
+                      {item.id === 3 ? "Pricing" : "Starting from"}
                     </motion.span>
                     <motion.div
                       initial={{ opacity: 0, y: 12, scale: 0.92 }}
@@ -1001,9 +987,7 @@ function ResidencesSection({ onImageClick }: { onImageClick: (img: string) => vo
                         ? settings.residence1Price 
                         : item.id === 2 
                         ? settings.residence2Price 
-                        : item.id === 3 
-                        ? settings.residence3Price 
-                        : settings.residence4Price}
+                        : settings.residence3Price}
                     </motion.div>
                   </div>
                 </div>
@@ -1100,117 +1084,123 @@ function FloorPlansSection({ onImageClick }: { onImageClick: (src: string) => vo
     {
       id: "2bhk-typical",
       category: "2 BHK Residences",
+      subtab: "Typical Layout",
       title: "Typical 2 BHK Layout (150 sqm)",
       desc: "A refined 150 sqm two-bedroom apartment that combines compact luxury with intelligent spatial planning. Features a bright, open lounge, a dining area connecting smoothly to a well-equipped kitchen with a utility balcony, and a private wing with two well-proportioned bedrooms.",
       specs: [
+        { label: "Total Area", val: "150 sqm" },
+        { label: "Bedrooms", val: "2 En-Suite" },
         { label: "Foyer", val: "1.5m x 2.3m" },
         { label: "Lounge", val: "5.0m x 5.2m" },
-        { label: "Lounge Viewing Deck", val: "5.7m x 2.0m" },
+        { label: "Viewing Deck", val: "5.7m x 2.0m" },
         { label: "Dining", val: "2.8m x 5.2m" },
         { label: "Kitchen & Balcony", val: "5.7m x 2.1m" },
-        { label: "Bedroom 1", val: "4.0m x 3.5m" },
-        { label: "Bedroom 2", val: "4.0m x 4.8m" },
       ],
       image: "/floor plan/3.png"
     },
     {
       id: "2bhk-signature",
       category: "2 BHK Residences",
-      title: "First Floor Signature 2 BHK (185 sqm)",
+      subtab: "Signature Layout",
+      title: "First Floor Signature 2 BHK (150 sqm)",
       desc: "The inaugural residence level establishes the tone of the development with a grand spatial narrative. Features a commanding formal lounge, a grand foyer of true architectural presence, and an expansive utility balcony that dissolves the boundary between interior comfort and the lush external environment.",
       specs: [
+        { label: "Total Area", val: "150 sqm" },
+        { label: "Bedrooms", val: "2 En-Suite" },
         { label: "Foyer", val: "1.5m x 2.3m" },
         { label: "Lounge", val: "5.0m x 5.2m" },
-        { label: "Lounge Viewing Deck", val: "10.0m x 4.8m" },
+        { label: "Viewing Deck", val: "10.0m x 4.8m" },
         { label: "Dining", val: "2.8m x 5.2m" },
         { label: "Kitchen & Balcony", val: "5.7m x 2.1m" },
-        { label: "Bedroom 1 & Closet", val: "4.0m x 3.5m" },
-        { label: "Bedroom 2", val: "4.0m x 4.8m" },
       ],
       image: "/floor plan/1.png"
     },
     {
       id: "3bhk-typical",
       category: "3 BHK Residences",
+      subtab: "Typical 3 BHK",
       title: "Typical 3 BHK Layout (200 sqm)",
-      desc: "A refined three-bedroom apartment that blends contemporary elegance with practical family living. The home opens with a welcoming foyer leading into a spacious open-plan lounge extending onto a generous viewing deck. The private wing features two well-sized bedrooms and a master suite with a walk-in wardrobe and en-suite.",
+      desc: "A refined 200 sqm three-bedroom apartment that blends contemporary elegance with practical family living. The home opens with a welcoming foyer leading into a spacious open-plan lounge extending onto a generous viewing deck. The private wing features two well-sized bedrooms and a master suite with a walk-in wardrobe and en-suite.",
       specs: [
+        { label: "Total Area", val: "200 sqm" },
+        { label: "Bedrooms", val: "3 En-Suite" },
         { label: "Foyer", val: "1.5m x 1.2m" },
         { label: "Lounge", val: "5.4m x 6.0m" },
         { label: "Lounge Terrace", val: "8.0m x 2.0m" },
         { label: "Dining", val: "5.4m x 2.8m" },
         { label: "Kitchen & Balcony", val: "3.8m x 2.6m" },
-        { label: "Master Suite", val: "4.0m x 3.6m" },
-        { label: "Bedroom 2", val: "4.0m x 4.0m" },
-        { label: "Bedroom 3", val: "4.2m x 4.5m" },
       ],
       image: "/floor plan/4.png"
     },
     {
-      id: "3bhk-pent-l12",
-      category: "3 BHK Penthouses",
-      title: "3 BHK Penthouse — Levels 1 & 2 (300 sqm)",
-      desc: "Level 1 introduces a refined entertainment floor anchored by an intimate lounge opening onto a private terrace, connecting to a professional-grade kitchen. Level 2 transitions into a private family domain defined by a family lounge overlooking the double-height void and bedrooms arranged as private sanctuaries.",
+      id: "4bhk-pent-l12",
+      category: "4 BHK Penthouses",
+      subtab: "Levels 1 & 2",
+      title: "4 BHK Penthouse — Levels 1 & 2 (525 sqm)",
+      desc: "Spanning 525 sqm across three levels, Levels 1 & 2 establish a grand ceremonial living domain. Features an expansive formal salon, panoramic viewing terrace, executive study, state-of-the-art dual kitchens, and private bedroom suites arranged around an architectural double-height void.",
       specs: [
+        { label: "Total Area", val: "525 sqm" },
+        { label: "Configuration", val: "4 BHK Tri-Level" },
+        { label: "Foyer", val: "1.5m x 0.5m" },
+        { label: "Grand Lounge", val: "5.4m x 6.0m" },
+        { label: "Lounge Terrace", val: "8.0m x 2.0m" },
+        { label: "Formal Dining", val: "5.4m x 4.0m" },
+        { label: "Dry & Wet Kitchen", val: "4.2m x 3.6m" },
+        { label: "Executive Study", val: "2.8m x 2.7m" },
+      ],
+      image: "/floor plan/7.png"
+    },
+    {
+      id: "4bhk-pent-l3",
+      category: "4 BHK Penthouses",
+      subtab: "Level 3 Sky Deck",
+      title: "4 BHK Penthouse — Level 3 (Sky Deck & Terrace)",
+      desc: "Level 3 crowns the 525 sqm penthouse as an elevated panoramic sky domain. A vast wraparound terrace wraps the residence, paired with a private hot bath, skylight feature, staff quarters, and 360-degree views of the Kampala skyline.",
+      specs: [
+        { label: "Sky Level", val: "Penthouse Level 3" },
+        { label: "Terrace Domain", val: "16.8m x 13.5m" },
+        { label: "Private Hot Bath", val: "4.6m x 2.8m" },
+        { label: "Staff Accommodation", val: "2.3m x 2.6m" },
+        { label: "Washroom", val: "1.5m x 2.6m" },
+        { label: "Sky Lounge Lobby", val: "2.0m x 2.6m" },
+      ],
+      image: "/floor plan/8.png"
+    },
+    {
+      id: "4bhk-pent-opt1",
+      category: "4 BHK Penthouses",
+      subtab: "Suite Plan (Levels 1 & 2)",
+      title: "4 BHK Penthouse — Suite Plan (Levels 1 & 2)",
+      desc: "Architectural variation showcasing a private entertainment lounge, formal dining room, and private bedroom sanctuaries arranged around the upper family lounge.",
+      specs: [
+        { label: "Total Area", val: "525 sqm" },
         { label: "Foyer", val: "2.8m x 5.2m" },
-        { label: "Lounge", val: "1.2m x 2.4m" },
-        { label: "Lounge Terrace", val: "3.6m x 3.5m" },
+        { label: "Lounge", val: "5.4m x 6.0m" },
+        { label: "Terrace", val: "3.6m x 3.5m" },
         { label: "Dining", val: "2.4m x 2.1m" },
-        { label: "Kitchen", val: "1.4m x 1.6m" },
-        { label: "Staircase", val: "4.8m x 2.3m" },
         { label: "Family Room", val: "4.1m x 5.2m" },
       ],
       image: "/floor plan/5.png"
     },
     {
-      id: "3bhk-pent-l3",
-      category: "3 BHK Penthouses",
-      title: "3 BHK Penthouse — Level 3 (Sky Light)",
-      desc: "Level 3 completes the penthouse as an exclusive sky deck. This level combines staff accommodation, service areas, and a vast open terrace designed for leisure, entertainment, and private retreat under a central skylight.",
+      id: "4bhk-pent-opt2",
+      category: "4 BHK Penthouses",
+      subtab: "Suite Plan (Level 3)",
+      title: "4 BHK Penthouse — Suite Plan (Level 3 Sky Deck)",
+      desc: "Exclusive sky retreat featuring an open outdoor entertainment deck with central skylight, hot bath relaxation court, and separate staff quarters.",
       specs: [
-        { label: "Lobby", val: "2.4m x 3.9m" },
-        { label: "Servant Quarter", val: "2.2m x 2.7m" },
-        { label: "Washroom", val: "2.2m x 1.3m" },
-        { label: "Staircase", val: "4.8m x 2.1m" },
+        { label: "Sky Deck", val: "Roof Level" },
         { label: "Terrace", val: "4.9m x 10.2m" },
         { label: "Hot Bath", val: "4.6m x 2.3m" },
+        { label: "Staff Quarter", val: "2.2m x 2.7m" },
+        { label: "Lobby", val: "2.4m x 3.9m" },
       ],
       image: "/floor plan/6.png"
     },
     {
-      id: "5bhk-pent-l12",
-      category: "5 BHK Penthouses",
-      title: "Grand 5 BHK Penthouse — Levels 1 & 2 (450 sqm)",
-      desc: "Level 1 establishes a ceremonial arrival sequence leading into a grand salon and expansive terrace, supported by guest suites and an executive office. Level 2 elevates living into a dual-salon experience centered around a dramatic double-height void with master suites and secondary suites.",
-      specs: [
-        { label: "Foyer", val: "1.5m x 0.5m" },
-        { label: "Lounge", val: "5.4m x 6.0m" },
-        { label: "Lounge Terrace", val: "8.0m x 2.0m" },
-        { label: "Dining", val: "5.4m x 4.0m" },
-        { label: "Dry Kitchen", val: "4.2m x 3.6m" },
-        { label: "Staircase", val: "3.1m x 4.2m" },
-        { label: "Office / Study", val: "2.8m x 2.7m" },
-      ],
-      image: "/floor plan/7.png"
-    },
-    {
-      id: "5bhk-pent-l3",
-      category: "5 BHK Penthouses",
-      title: "Grand 5 BHK Penthouse — Level 3 (Sky Deck)",
-      desc: "Level 3 completes the penthouse as an elevated sky estate. A vast L-shaped terrace wraps the entire structure, creating a panoramic outdoor domain for entertainment at scale with a sculptural skylight and private hot bath.",
-      specs: [
-        { label: "Lobby", val: "2.0m x 2.6m" },
-        { label: "Servant Quarter", val: "2.3m x 2.6m" },
-        { label: "Washroom", val: "1.5m x 2.6m" },
-        { label: "Staircase", val: "3.1m x 4.2m" },
-        { label: "Terrace", val: "16.8m x 13.5m" },
-        { label: "Hot Bath", val: "4.6m x 2.8m" },
-      ],
-      image: "/floor plan/8.png"
-    },
-    {
       id: "typical-plate",
       category: "Typical Floor Plate",
+      subtab: "Typical Plate",
       title: "Typical Floor Layout Plate",
       desc: "A symmetrically arranged typical floor plate designed to maximize efficiency and privacy. Symmetrically arranged apartments organize circulation around a central core with three passenger elevators, service lift, and dedicated rubbish chute, creating an intuitive flow throughout the tower.",
       specs: [
@@ -1227,8 +1217,7 @@ function FloorPlansSection({ onImageClick }: { onImageClick: (src: string) => vo
     "Typical Floor Plate",
     "2 BHK Residences",
     "3 BHK Residences",
-    "3 BHK Penthouses",
-    "5 BHK Penthouses"
+    "4 BHK Penthouses"
   ];
 
   const handleCategoryChange = (cat: string) => {
@@ -1284,9 +1273,9 @@ function FloorPlansSection({ onImageClick }: { onImageClick: (src: string) => vo
                       : "text-white/55 hover:text-white"
                   }`}
                 >
-                  {p.title.includes("Typical") || p.title.includes("Signature")
+                  {p.subtab || (p.title.includes("Typical") || p.title.includes("Signature")
                     ? p.title.split("(")[0].trim()
-                    : p.title.split("—")[1]?.trim() || p.title}
+                    : p.title.split("—")[1]?.trim() || p.title)}
                 </button>
               ))}
             </div>
@@ -2742,7 +2731,7 @@ export default function LavelleWebsite() {
               />
             </div>
             <p className="max-w-sm text-sm leading-7 text-white/60">
-              35 bespoke luxury residences in Bugolobi, Kampala. Signature earthy interiors, 3.2M ceilings, panoramic terraces, and world-class amenities.
+              37 bespoke luxury residences in Bugolobi, Kampala. Signature earthy interiors, 3.2M ceilings, panoramic terraces, and world-class amenities.
             </p>
             <div className="mt-5 flex gap-3">
               <a

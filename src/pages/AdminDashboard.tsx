@@ -73,10 +73,10 @@ export default function AdminDashboard() {
     heroVideoUrl: "https://www.youtube.com/embed/bQaBlh1N7IA?autoplay=1&mute=1&controls=0&loop=1&playlist=bQaBlh1N7IA&rel=0&playsinline=1&vq=hd1080",
     waNumber: "256791272727",
     contactPhone: "+256 791 272727",
-    residence1Price: "$168,000",
-    residence2Price: "$245,000",
-    residence3Price: "$390,000",
-    residence4Price: "$590,000"
+    residence1Price: "$215,000",
+    residence2Price: "$289,000",
+    residence3Price: "Enquiries Only",
+    residence4Price: "Enquiries Only"
   });
   const [saveStatus, setSaveStatus] = useState("idle");
 
@@ -457,13 +457,14 @@ export default function AdminDashboard() {
 
                   <div className="space-y-4">
                     <h3 className="text-lg font-medium text-[#c88e71]">Property Pricing</h3>
-                    <div className="grid gap-4 grid-cols-2 md:grid-cols-4">
+                    <div className="grid gap-4 grid-cols-1 md:grid-cols-3">
                       <div className="grid gap-2">
                         <label className="text-sm text-white/70">2 BHK Residences Price</label>
                         <Input
                           value={siteSettings.residence1Price}
                           onChange={(e) => setSiteSettings({ ...siteSettings, residence1Price: e.target.value })}
                           className="bg-black/30 border-white/10 text-white"
+                          placeholder="$215,000"
                         />
                       </div>
                       <div className="grid gap-2">
@@ -472,22 +473,16 @@ export default function AdminDashboard() {
                           value={siteSettings.residence2Price}
                           onChange={(e) => setSiteSettings({ ...siteSettings, residence2Price: e.target.value })}
                           className="bg-black/30 border-white/10 text-white"
+                          placeholder="$289,000"
                         />
                       </div>
                       <div className="grid gap-2">
-                        <label className="text-sm text-white/70">3 BHK Penthouse Price</label>
+                        <label className="text-sm text-white/70">4 BHK Penthouse Price</label>
                         <Input
                           value={siteSettings.residence3Price}
-                          onChange={(e) => setSiteSettings({ ...siteSettings, residence3Price: e.target.value })}
+                          onChange={(e) => setSiteSettings({ ...siteSettings, residence3Price: e.target.value, residence4Price: e.target.value })}
                           className="bg-black/30 border-white/10 text-white"
-                        />
-                      </div>
-                      <div className="grid gap-2">
-                        <label className="text-sm text-white/70">5 BHK Penthouse Price</label>
-                        <Input
-                          value={siteSettings.residence4Price}
-                          onChange={(e) => setSiteSettings({ ...siteSettings, residence4Price: e.target.value })}
-                          className="bg-black/30 border-white/10 text-white"
+                          placeholder="Enquiries Only"
                         />
                       </div>
                     </div>
